@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Open Graph card template</title>
+<!-- Rendered to assets/og/*.png by tools/og-image.mjs. Not deployed as a page. -->
+<link rel="stylesheet" href="og-fonts.css">
+<link rel="stylesheet" href="../assets/tokens.css">
+<style>
+  html, body { margin: 0; }
+  body {
+    width: 1200px;
+    height: 630px;
+    background: var(--ink-900);
+    color: var(--washi-100);
+    font-family: var(--font-sans);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 72px;
+    box-sizing: border-box;
+  }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand svg { display: block; }
+  .brand span {
+    font-family: var(--font-display);
+    font-size: 40px;
+    letter-spacing: var(--tracking-wordmark);
+    line-height: 1;
+  }
+  .body { display: flex; flex-direction: column; gap: 24px; }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 68px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0;
+    max-width: 19ch;
+  }
+  h1.long { font-size: 56px; }
+  p {
+    font-size: 26px;
+    line-height: 1.4;
+    color: var(--clay-200);
+    margin: 0;
+    max-width: 44ch;
+  }
+  .foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #2E2A26;
+    padding-top: 24px;
+    font-family: var(--font-mono);
+    font-size: 20px;
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--clay-400);
+  }
+</style>
+</head>
+<body>
+  <div class="brand">
+    <svg width="48" height="48" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="12" fill="#D9664F"></circle>
+      <path d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke="#14110F" stroke-width="1.75"></path>
+      <circle cx="12" cy="12" r="1.9" fill="#14110F"></circle>
+    </svg>
+    <span>hokan</span>
+  </div>
+  <div class="body">
+    <h1 id="title">Escrow as infrastructure for Cardano.</h1>
+    <p id="tagline">Non-custodial escrow on Cardano.</p>
+  </div>
+  <div class="foot">
+    <span id="domain">usehokan.com</span>
+    <span>Escrow · Cardano · Non-custodial</span>
+  </div>
+</body>
+</html>

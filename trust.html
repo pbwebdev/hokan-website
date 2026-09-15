@@ -3,20 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trust — Hokan</title>
-<meta name="description" content="What Hokan can and cannot do. The list of guarantees that hold whether or not you trust the team, because the validator enforces them.">
+<title>Trust: what Hokan can and cannot do</title>
+<meta name="description" content="The guarantees that hold whether or not you trust the team: we cannot move, trap or re-price your funds. Plus audit scope, vulnerability reporting and the FAQ.">
+<link rel="canonical" href="https://usehokan.com/trust.html">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#EFEAE0">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#14110F">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hokan">
-<meta property="og:title" content="Trust — Hokan">
-<meta property="og:description" content="What Hokan can and cannot do. The list of guarantees that hold whether or not you trust the team, because the validator enforces them.">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://usehokan.com/trust.html">
+<meta property="og:title" content="Trust: what Hokan can and cannot do">
+<meta property="og:description" content="The guarantees that hold whether or not you trust the team: we cannot move, trap or re-price your funds. Plus audit scope, vulnerability reporting and the FAQ.">
+<meta property="og:image" content="https://usehokan.com/assets/og/trust.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="What we can and cannot do — The guarantees that hold whether or not you trust the team, because the validator enforces them.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trust: what Hokan can and cannot do">
+<meta name="twitter:description" content="The guarantees that hold whether or not you trust the team: we cannot move, trap or re-price your funds. Plus audit scope, vulnerability reporting and the FAQ.">
+<meta name="twitter:image" content="https://usehokan.com/assets/og/trust.png">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "FAQPage",
+      "@id": "https://usehokan.com/trust.html#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What happens if Hokan shuts down?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open escrows resolve without us. The rules live in the contract, the transactions can be built by anyone, and the exit paths do not require our signature. You would lose the API, the webhooks and the support, not the money."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you freeze my escrow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We can stop new escrows being created on a version, which exists so we can halt a compromised version without trapping anyone, and that flag has no effect on escrows that already exist."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who resolves disputes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Whoever you nominate, which defaults to you rather than to us. Whoever it is can only split the money between the two parties already named in the escrow, and loses the ability to act at all once the window expires."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a token?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Nothing to buy, stake or farm. Our revenue is a fee on settled work, which means we only earn when the protocol is actually used."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need to understand Cardano?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To integrate, no. You call an API and hand the returned transaction to a wallet. To evaluate whether the guarantees are real, some, and the contract source and the specification are public so you can check rather than take our word for it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I build my own transactions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, and the system assumes you will. The contract does not care who assembled a transaction, only whether it satisfies the rules. Anything that only works because we built it would not be a protocol."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What assets are supported?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ada, USDM and USDCx by default. Other Cardano native assets follow through configuration."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are you a money transmitter?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. We do not hold customer funds at any point and are not licensed to hold them. Funds move from the depositor’s wallet into the contract and from the contract to the receiver, and no Hokan wallet is anywhere in that path."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <!-- Built by tools/build.mjs from trust.dc.html. Edit the design source, not this file. -->
@@ -68,9 +157,9 @@
 </section><hr class="rule"><section id="audit" class="stack-16">
 <h2 class="section-title">Audit</h2><p class="copy">Scope covers the validator, the minting policies, the configuration mechanism and the off chain transaction builder. The builder is in scope deliberately, because published audits of comparable systems keep finding issues in exactly that layer, and leaving it out would make the audit look more complete than it was.</p><p class="copy">Auditors work against the state transition table and the threat model at a specific commit, both of which are written before the contract rather than reconstructed after it.</p>
 </section><hr class="rule"><section class="stack-16">
-<h2 class="section-title">Reporting a vulnerability</h2><p class="copy">Report privately to <span class="mono-amt">security@[domain]</span> rather than opening an issue. We acknowledge within two business days and aim to give an assessment within ten.</p><p class="copy">We will not take legal action against good faith research that stays in scope, avoids privacy violations and service degradation, and gives us reasonable time before disclosure.</p><p class="copy">We hold ourselves to the same standard. Where our own research finds a vulnerability in another project, we notify them privately and give them time to respond before we publish anything, including internally circulated documents that describe the issue in reproducible detail.</p>
+<h2 class="section-title">Reporting a vulnerability</h2><p class="copy">Report privately to <span class="mono-amt">security@usehokan.com</span> rather than opening an issue. We acknowledge within two business days and aim to give an assessment within ten.</p><p class="copy">We will not take legal action against good faith research that stays in scope, avoids privacy violations and service degradation, and gives us reasonable time before disclosure.</p><p class="copy">We hold ourselves to the same standard. Where our own research finds a vulnerability in another project, we notify them privately and give them time to respond before we publish anything, including internally circulated documents that describe the issue in reproducible detail.</p>
 </section><hr class="rule"><section id="faq" class="stack-16">
-<h2 class="section-title">Questions people actually ask</h2><h3 class="h3 h3--spaced">What happens if Hokan shuts down?</h3><p class="copy">Open escrows resolve without us. The rules live in the contract, the transactions can be built by anyone, and the exit paths do not require our signature. You would lose the API, the webhooks and the support, not the money.</p><h3 class="h3 h3--spaced">Can you freeze my escrow?</h3><p class="copy">No. We can stop new escrows being created on a version, which exists so we can halt a compromised version without trapping anyone, and that flag has no effect on escrows that already exist.</p><h3 class="h3 h3--spaced">Who resolves disputes?</h3><p class="copy">Whoever you nominate, which defaults to you rather than to us. Whoever it is can only split the money between the two parties already named in the escrow, and loses the ability to act at all once the window expires.</p><h3 class="h3 h3--spaced">Is there a token?</h3><p class="copy">No. Nothing to buy, stake or farm. Our revenue is a fee on settled work, which means we only earn when the protocol is actually used.</p><h3 class="h3 h3--spaced">Do I need to understand Cardano?</h3><p class="copy">To integrate, no. You call an API and hand the returned transaction to a wallet. To evaluate whether the guarantees are real, some, and the contract source and the specification are public so you can check rather than take our word for it.</p><h3 class="h3 h3--spaced">Can I build my own transactions?</h3><p class="copy">Yes, and the system assumes you will. The contract does not care who assembled a transaction, only whether it satisfies the rules. Anything that only works because we built it would not be a protocol.</p><!-- "What assets are supported?" is unpublished: the design carries only a pre-publication note here. --><!-- "Are you a money transmitter?" is unpublished: the design carries only a pre-publication note here. -->
+<h2 class="section-title">Questions people actually ask</h2><h3 class="h3 h3--spaced">What happens if Hokan shuts down?</h3><p class="copy">Open escrows resolve without us. The rules live in the contract, the transactions can be built by anyone, and the exit paths do not require our signature. You would lose the API, the webhooks and the support, not the money.</p><h3 class="h3 h3--spaced">Can you freeze my escrow?</h3><p class="copy">No. We can stop new escrows being created on a version, which exists so we can halt a compromised version without trapping anyone, and that flag has no effect on escrows that already exist.</p><h3 class="h3 h3--spaced">Who resolves disputes?</h3><p class="copy">Whoever you nominate, which defaults to you rather than to us. Whoever it is can only split the money between the two parties already named in the escrow, and loses the ability to act at all once the window expires.</p><h3 class="h3 h3--spaced">Is there a token?</h3><p class="copy">No. Nothing to buy, stake or farm. Our revenue is a fee on settled work, which means we only earn when the protocol is actually used.</p><h3 class="h3 h3--spaced">Do I need to understand Cardano?</h3><p class="copy">To integrate, no. You call an API and hand the returned transaction to a wallet. To evaluate whether the guarantees are real, some, and the contract source and the specification are public so you can check rather than take our word for it.</p><h3 class="h3 h3--spaced">Can I build my own transactions?</h3><p class="copy">Yes, and the system assumes you will. The contract does not care who assembled a transaction, only whether it satisfies the rules. Anything that only works because we built it would not be a protocol.</p><h3 class="h3 h3--spaced">What assets are supported?</h3><p class="copy">Ada, USDM and USDCx by default. Other Cardano native assets follow through configuration.</p><h3 class="h3 h3--spaced">Are you a money transmitter?</h3><p class="copy">No. We do not hold customer funds at any point and are not licensed to hold them. Funds move from the depositor’s wallet into the contract and from the contract to the receiver, and no Hokan wallet is anywhere in that path.</p>
 </section>
   </div>
   </main>

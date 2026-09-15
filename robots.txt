@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /_ds/
+Disallow: /tools/
+Disallow: /*.dc.html$
+
+Sitemap: https://usehokan.com/sitemap.xml

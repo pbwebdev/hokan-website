@@ -20,74 +20,10 @@
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { NAV, PAGES, SHOW_NOTES, SITE_URL } from "./pages.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DS = join(ROOT, "_ds", readdirSync(join(ROOT, "_ds"))[0]);
-
-/* Editorial notes addressed to the authors, not to visitors. */
-const SHOW_NOTES = false;
-
-const NAV = [
-  { label: "How it works", href: "how-it-works.html" },
-  { label: "Architecture", href: "architecture.html" },
-  { label: "Use cases", href: "use-cases.html" },
-  { label: "Pricing", href: "pricing.html" },
-  { label: "Trust", href: "trust.html" },
-  { label: "Docs", href: "#docs" },
-];
-
-const PAGES = [
-  {
-    src: "index.dc.html",
-    out: "index.html",
-    title: "Hokan — Escrow as infrastructure for Cardano",
-    description:
-      "Non-custodial escrow on Cardano. Funds lock in a contract, release on conditions both sides agreed, and settle on chain. Integrate it with an API call.",
-  },
-  {
-    src: "how-it-works.dc.html",
-    out: "how-it-works.html",
-    active: "How it works",
-    title: "How it works — Hokan",
-    description:
-      "Five states, six roles, and one rule that decides everything else: the person being paid never has to sign.",
-  },
-  {
-    src: "architecture.dc.html",
-    out: "architecture.html",
-    active: "Architecture",
-    title: "Architecture — Hokan",
-    description:
-      "One contract on Cardano, one hosted API, and a chain follower that tells you when something changed. Everything else is detail.",
-  },
-  {
-    src: "use-cases.dc.html",
-    out: "use-cases.html",
-    active: "Use cases",
-    title: "Use cases — Hokan",
-    description:
-      "Bounties, freelance milestones, marketplaces, security deposits, grants and agent commerce — the same contract underneath all of them.",
-  },
-  {
-    src: "pricing.dc.html",
-    out: "pricing.html",
-    active: "Pricing",
-    title: "Pricing — Hokan",
-    description:
-      "One fee on released funds. Yours on top, capped by the contract. Nothing charged on an escrow that is cancelled or expires.",
-  },
-  {
-    src: "trust.dc.html",
-    out: "trust.html",
-    active: "Trust",
-    title: "Trust — Hokan",
-    description:
-      "What Hokan can and cannot do. The list of guarantees that hold whether or not you trust the team, because the validator enforces them.",
-    // Questions whose only content was a pre-publication note. Restore these
-    // to trust.dc.html (with an answer) and delete them from this list.
-    dropHeadings: ["What assets are supported?", "Are you a money transmitter?"],
-  },
-];
 
 /* Every inline style the design emits, mapped to a class in assets/site.css. */
 const STYLE_CLASSES = new Map(Object.entries({
@@ -175,6 +111,69 @@ const STYLE_CLASSES = new Map(Object.entries({
   "margin:0;max-width:46ch;color:var(--text-muted)": "footer-note",
 }));
 
+/* --- small helpers ------------------------------------------------ */
+
+const attr = (v) => String(v).replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+
+/* Visible text of a fragment, for structured data. */
+function plain(fragment) {
+  return fragment
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/* Schema.org JSON-LD. Only describes what the page actually says: the
+   organisation, the site, and the questions and answers on the trust page. */
+function structuredData(page, html, canonical) {
+  const wants = page.schema || [];
+  const graph = [];
+
+  if (wants.includes("organization")) {
+    graph.push({
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Hokan",
+      url: SITE_URL,
+      logo: `${SITE_URL}/assets/favicon.svg`,
+      description:
+        "Non-custodial escrow infrastructure on Cardano. Hokan is not a marketplace and not a custodian.",
+    });
+  }
+
+  if (wants.includes("website")) {
+    graph.push({
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      name: "Hokan",
+      url: SITE_URL,
+      publisher: { "@id": `${SITE_URL}/#organization` },
+      inLanguage: "en",
+    });
+  }
+
+  if (wants.includes("faq")) {
+    const qa = [...html.matchAll(
+      /<h3 class="h3 h3--spaced">([^<]*\?)<\/h3>\s*<p class="copy">([\s\S]*?)<\/p>/g,
+    )].map(([, question, answer]) => ({
+      "@type": "Question",
+      name: plain(question),
+      acceptedAnswer: { "@type": "Answer", text: plain(answer) },
+    }));
+    if (qa.length < 2) throw new Error(`${page.src}: FAQ markup changed, found ${qa.length} pairs`);
+    graph.push({ "@type": "FAQPage", "@id": `${canonical}#faq`, mainEntity: qa });
+  }
+
+  if (!graph.length) return "";
+  const json = JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2);
+  return `<script type="application/ld+json">\n${json.replace(/</g, "\\u003c")}\n</script>\n`;
+}
+
 function topBar(active) {
   const links = NAV.map((l) => {
     const current = l.label === active ? ' aria-current="page"' : "";
@@ -239,16 +238,6 @@ function build(page) {
     return cls ? ` class="${cls}"` : "";
   });
 
-  // 5. headings left without an answer once the notes are dropped
-  for (const heading of page.dropHeadings || []) {
-    const before = html;
-    html = html.replace(
-      new RegExp(`<h3 class="[^"]*">${heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</h3>`),
-      `<!-- "${heading}" is unpublished: the design carries only a pre-publication note here. -->`,
-    );
-    if (html === before) throw new Error(`${page.src}: heading not found: ${heading}`);
-  }
-
   // 6. wide tables scroll rather than push the page sideways
   html = html.replace(
     /<table class="spec">[\s\S]*?<\/table>/g,
@@ -271,26 +260,42 @@ function build(page) {
     "\n  </main>\n\n  " +
     html.slice(beforeFooter);
 
+  const canonical = `${SITE_URL}/${page.out === "index.html" ? "" : page.out}`;
+  const ogImage = `${SITE_URL}/assets/og/${page.out.replace(/\.html$/, "")}.png`;
+  const jsonLd = structuredData(page, html, canonical);
+
   const doc = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${page.title}</title>
-<meta name="description" content="${page.description}">
+<meta name="description" content="${attr(page.description)}">
+<link rel="canonical" href="${canonical}">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#EFEAE0">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#14110F">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Hokan">
-<meta property="og:title" content="${page.title}">
-<meta property="og:description" content="${page.description}">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="${canonical}">
+<meta property="og:title" content="${attr(page.title)}">
+<meta property="og:description" content="${attr(page.description)}">
+<meta property="og:image" content="${ogImage}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${attr(`${page.og.title} — ${page.og.tagline}`)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${attr(page.title)}">
+<meta name="twitter:description" content="${attr(page.description)}">
+<meta name="twitter:image" content="${ogImage}">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
 <link rel="stylesheet" href="assets/tokens.css">
 <link rel="stylesheet" href="assets/site.css">
-</head>
+${jsonLd}</head>
 <body>
 <!-- Built by tools/build.mjs from ${page.src}. Edit the design source, not this file. -->
 <a class="skip-link" href="#main">Skip to content</a>
@@ -322,5 +327,35 @@ function buildTokens() {
   return "assets/tokens.css";
 }
 
+/* Crawl directives. The design sources sit next to the deployed pages, so
+   they are disallowed rather than left to be discovered. */
+function buildRobots() {
+  const body = `User-agent: *
+Allow: /
+Disallow: /_ds/
+Disallow: /tools/
+Disallow: /*.dc.html$
+
+Sitemap: ${SITE_URL}/sitemap.xml
+`;
+  writeFileSync(join(ROOT, "robots.txt"), body);
+  return "robots.txt";
+}
+
+function buildSitemap() {
+  const lastmod = new Date().toISOString().slice(0, 10);
+  const urls = PAGES.map((p) => {
+    const loc = `${SITE_URL}/${p.out === "index.html" ? "" : p.out}`;
+    return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+  }).join("\n");
+  writeFileSync(
+    join(ROOT, "sitemap.xml"),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
+  );
+  return "sitemap.xml";
+}
+
 console.log("wrote", buildTokens());
 for (const page of PAGES) console.log("wrote", build(page));
+console.log("wrote", buildSitemap());
+console.log("wrote", buildRobots());
