@@ -1,0 +1,67 @@
+:root {
+  /* Core ramp */
+  --ink-900: #14110F;   /* sumi */
+  --ink-700: #24201D;
+  --ink-500: #3A3632;   /* charcoal */
+  --clay-600: #6E675C;
+  --clay-400: #8C857A;
+  --clay-200: #C4BDB2;
+  --washi-100: #EFEAE0;
+  --washi-50: #F7F4ED;
+  --washi-0: #FDFBF6;
+  --seal-500: #B23A2E;  /* hanko */
+  --seal-600: #8E2C22;  /* hover, pressed */
+  --seal-400: #D9664F;  /* dark-mode accent */
+  --seal-50: #F6E7E4;   /* tint only */
+  --cardano-blue: #0033AD; /* footer lockup only */
+
+  /* Light mode semantics */
+  --page: var(--washi-100);
+  --card: var(--washi-50);
+  --elevated: var(--washi-0);
+  --text: var(--ink-900);
+  --text-2: var(--ink-500);
+  --text-muted: var(--clay-600);
+  --border: #DAD3C6;          /* decorative dividers only */
+  --border-input: var(--clay-400); /* any border that is the only cue a control exists */
+  --accent: var(--seal-500);
+  --accent-hover: var(--seal-600);
+  --accent-text: var(--washi-100); /* text on accent fills */
+  --accent-tint: var(--seal-50);
+  --focus-ring: var(--ink-900);
+  --inverse-surface: var(--ink-900);
+  --inverse-text: var(--washi-100);
+
+  /* Escrow states, light */
+  --state-locked: #B23A2E;
+  --state-released: #3E6B4A;
+  --state-pending: #8A5F1B;
+  --state-expired: #6E675C;
+  --state-dispute: #14110F;   /* derived: neutral-strong, icon carries meaning */
+  --state-refunded: #3A3632;  /* derived */
+}
+
+[data-theme="dark"] {
+  --page: var(--ink-900);
+  --card: #1C1917;
+  --elevated: var(--ink-700);
+  --text: var(--washi-100);
+  --text-2: var(--clay-200);
+  --text-muted: var(--clay-400);
+  --border: #2E2A26;
+  --border-input: #7F776C;
+  --accent: var(--seal-400);
+  --accent-hover: #E27A64;
+  --accent-text: var(--ink-900); /* never washi on accent in dark */
+  --accent-tint: #3A241F;
+  --focus-ring: var(--washi-100);
+  --inverse-surface: var(--washi-100);
+  --inverse-text: var(--ink-900);
+
+  --state-locked: #D9664F;
+  --state-released: #6FA57E;
+  --state-pending: #C79A3E;
+  --state-expired: #8C857A;
+  --state-dispute: #EFEAE0;
+  --state-refunded: #C4BDB2;
+}

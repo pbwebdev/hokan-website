@@ -1,0 +1,5 @@
+body { margin: 0; background: var(--page); color: var(--text); font-family: var(--font-sans); font-size: var(--text-body-lg); line-height: var(--lh-body-lg); -webkit-font-smoothing: antialiased; font-feature-settings: "tnum"; }
+a { color: var(--text); text-decoration: underline; text-decoration-color: var(--clay-400); text-underline-offset: 2px; }
+a:hover { color: var(--accent); text-decoration-color: currentColor; }
+code, kbd, samp, .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }

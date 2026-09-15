@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/base.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/styles.css">
+<script src="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--page);color:var(--text);font-family:var(--font-sans);text-wrap:pretty} a{color:var(--text);text-decoration-color:var(--clay-400);text-underline-offset:3px} a:hover{color:var(--accent);text-decoration-color:currentColor}</style>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="How it works" style="background:var(--page);color:var(--text);min-height:100vh;font-family:var(--font-sans);font-size:16px;line-height:1.55">
+  <x-import component-from-global-scope="HokanDesignSystem_3594b4.TopBar" dc-props="{{ bar }}" hint-size="100%,56px"></x-import>
+
+  <main style="max-width:1120px;margin:0 auto;padding:64px clamp(20px,6vw,80px) 96px">
+<div style="display:flex;flex-direction:column;gap:16px;margin-bottom:64px">
+  <h1 style="font-family:var(--font-display);font-weight:400;font-size:clamp(36px,5vw,48px);line-height:1.05;letter-spacing:-0.01em;margin:0;max-width:20ch">How it works</h1>
+  <p style="font-size:20px;line-height:1.4;color:var(--text-2);max-width:640px;margin:0">Five states, six roles, and one rule that decides everything else: the person being paid never has to sign.</p>
+</div><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">The lifecycle</h2><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;margin:8px 0"><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--card);border:1px solid var(--border)">Created</b><span style="width:16px;height:1px;background:var(--border-input)"></span><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--card);border:1px solid var(--border)">Funded</b><span style="width:16px;height:1px;background:var(--border-input)"></span><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--card);border:1px solid var(--border)">Approved</b><span style="width:16px;height:1px;background:var(--border-input)"></span><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--inverse-surface);color:var(--inverse-text);border:1px solid var(--inverse-surface)">Released</b></div><p style="margin:0;max-width:640px">An escrow is created with its parties, its amount, its milestones and its release rules. Nothing is locked yet, and nothing is binding.</p><p style="margin:0;max-width:640px">The depositor funds it. At that moment the terms become immutable, including the complete fee schedule, so what they signed is what will happen.</p><p style="margin:0;max-width:640px">The service provider marks a milestone delivered. The approver confirms the condition is met, and that approval is recorded on chain and cannot be withdrawn.</p><p style="margin:0;max-width:640px">Release moves the funds to the receiver, with every fee routed in the same transaction. There is no separate settlement run and no reconciliation window.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">When it does not go that way</h3><div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13px;margin:8px 0"><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--card);border:1px solid var(--border)">Funded</b><span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);padding:0 4px">or</span><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--card);border:1px solid var(--border)">Approved</b><span style="width:16px;height:1px;background:var(--border-input)"></span><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--card);border:1px solid var(--border)">Disputed</b><span style="width:16px;height:1px;background:var(--border-input)"></span><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--inverse-surface);color:var(--inverse-text);border:1px solid var(--inverse-surface)">Resolved</b><span style="font-family:var(--font-mono);font-size:12px;color:var(--text-muted);padding:0 4px">or</span><b style="font-weight:500;padding:6px 12px;border-radius:4px;background:var(--inverse-surface);color:var(--inverse-text);border:1px solid var(--inverse-surface)">Fallback</b></div><p style="margin:0;max-width:640px">A deadline that passes without approval refunds the depositor. Either party can raise a dispute before release. Both sides can also agree to unwind, in which case the funds go back and no fee is charged.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Roles</h2><p style="margin:0;max-width:640px">Our role names follow Trustless Work, which is becoming the common vocabulary for escrow APIs. If you have integrated with them, you can read our documentation without relearning anything. A single address can hold several roles, and your platform decides the mapping when the escrow is created.</p><table style="width:100%;max-width:760px;border-collapse:collapse;font-size:14px;line-height:1.5;margin:8px 0">
+<thead><tr><th scope="col" style="text-align:left;padding:10px 16px 10px 0;font-size:12px;font-weight:500;color:var(--text-muted);border-bottom:1px solid var(--border-input)">Role</th><th scope="col" style="text-align:left;padding:10px 16px 10px 0;font-size:12px;font-weight:500;color:var(--text-muted);border-bottom:1px solid var(--border-input)">What it can do</th></tr></thead>
+<tbody><tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Depositor</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Funds the escrow and receives refunds. Cannot release.</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Approver</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Approves a milestone and can raise a dispute. Cannot release.</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Service provider</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Marks milestone progress and attaches evidence. Can raise a dispute.</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Release signer</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Executes release once approval conditions are met. Cannot approve.</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Receiver</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Receives the funds. Signs nothing.</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Dispute resolver</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Splits a disputed amount between the two sides. Optional.</td></tr></tbody></table><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Approval and release are separate</h3><p style="margin:0;max-width:640px">They are also separate from status. An approval can legitimately arrive before a status update, so release depends on the approval state rather than on a status label. Conflating the three is where escrow designs usually go wrong, and it is why the approver and the release signer are different roles rather than one.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Roles are addresses, not credentials</h3><p style="margin:0;max-width:640px">We hold full addresses rather than payment credentials, so being paid through Hokan does not strip your staking rights. A role can also be held by a script, which is how a DAO or a multisig can act as an approver or a resolver rather than delegating to one person’s key.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Disputes</h2><p style="margin:0;max-width:640px">Escrow without a dispute process is just a timelock. But a resolver who can move funds anywhere is a custodian wearing a different hat, so ours is bounded by the contract instead of by terms of service.</p><div style="display:flex;flex-direction:column;gap:32px;margin:16px 0"><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">It can only pay the two addresses already in the escrow</h3><p style="margin:0;max-width:640px">Not a third address, not itself, not us, and not an address supplied when the transaction is built. A different destination fails validation outright.</p></div>
+</div><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">Ignoring a dispute costs it the fee</h3><p style="margin:0;max-width:640px">The resolution window opens when the dispute is raised. Once it expires, a fallback path opens that anyone can execute, settling to the outcome the parties chose at creation. The dispute fee is charged on the resolution path only.</p></div>
+</div></div><p style="margin:0;max-width:640px">The resolver defaults to you, not to us. You hold the customer relationship and the context that makes a fair decision possible. We supply the machinery that stops it being abused.</p><p style="margin:0;max-width:640px">We call this expert determination rather than arbitration. Arbitration is a term with statutory duties attached that a platform decision cannot meet, and using it loosely creates an expectation nobody can honour.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Integrating</h2><p style="margin:0;max-width:640px">Every write operation follows the same shape. You describe what you want, we validate it and build the complete transaction, and you get back unsigned CBOR. Your wallet signs it and it goes to chain. You can inspect every byte before signing, which is what makes the fee disclosure real rather than a page in a contract.</p><p style="margin:0;max-width:640px">State changes arrive as signed webhooks, delivered at least once with idempotency keys so processing the same event twice is safe.</p><p style="margin:0;max-width:640px">Our SDK handles the parts that are genuinely annoying: merging a wallet witness set into a stored transaction body, partial signing when several parties are involved, sourcing collateral, and turning an expired intent into an error you can act on.</p><p style="margin:0;max-width:640px"><a href="architecture.dc.html">See the architecture</a> or <a href="#docs">read the documentation</a>.</p>
+</section>
+  </main>
+
+  <footer style="border-top:1px solid var(--border);padding:48px clamp(20px,6vw,80px) 64px;font-size:14px;color:var(--text-2)">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-wrap:wrap;gap:40px 64px;justify-content:space-between;align-items:flex-start">
+        <div style="display:flex;flex-wrap:wrap;gap:40px 64px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Product</div>
+            <a href="how-it-works.dc.html" style="color:var(--text-2);text-decoration:none">How it works</a>
+            <a href="architecture.dc.html" style="color:var(--text-2);text-decoration:none">Architecture</a>
+            <a href="use-cases.dc.html" style="color:var(--text-2);text-decoration:none">Use cases</a>
+            <a href="pricing.dc.html" style="color:var(--text-2);text-decoration:none">Pricing</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Developers</div>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Documentation</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">API reference</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Sandbox</a>
+            <a href="#repo" style="color:var(--text-2);text-decoration:none">Contracts</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Trust</div>
+            <a href="trust.dc.html" style="color:var(--text-2);text-decoration:none">Security</a>
+            <a href="trust.dc.html#audit" style="color:var(--text-2);text-decoration:none">Audit</a>
+            <a href="trust.dc.html#faq" style="color:var(--text-2);text-decoration:none">Questions</a>
+            <a href="#status" style="color:var(--text-2);text-decoration:none">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" style="height:24px;display:block">
+      </div>
+      <p style="margin:0;max-width:46ch;color:var(--text-muted)">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;\&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Appearance&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "light",
+      bar: {
+        links: [
+          { label: "How it works", href: "how-it-works.dc.html" },
+          { label: "Architecture", href: "architecture.dc.html" },
+          { label: "Use cases", href: "use-cases.dc.html" },
+          { label: "Pricing", href: "pricing.dc.html" },
+          { label: "Trust", href: "trust.dc.html" },
+          { label: "Docs", href: "#docs" }
+        ],
+        active: "How it works",
+        style: { padding: "0 clamp(20px,6vw,80px)" }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

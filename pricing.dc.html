@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/base.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/styles.css">
+<script src="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--page);color:var(--text);font-family:var(--font-sans);text-wrap:pretty} a{color:var(--text);text-decoration-color:var(--clay-400);text-underline-offset:3px} a:hover{color:var(--accent);text-decoration-color:currentColor}</style>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="Pricing" style="background:var(--page);color:var(--text);min-height:100vh;font-family:var(--font-sans);font-size:16px;line-height:1.55">
+  <x-import component-from-global-scope="HokanDesignSystem_3594b4.TopBar" dc-props="{{ bar }}" hint-size="100%,56px"></x-import>
+
+  <main style="max-width:1120px;margin:0 auto;padding:64px clamp(20px,6vw,80px) 96px">
+<div style="display:flex;flex-direction:column;gap:16px;margin-bottom:64px">
+  <h1 style="font-family:var(--font-display);font-weight:400;font-size:clamp(36px,5vw,48px);line-height:1.05;letter-spacing:-0.01em;margin:0;max-width:20ch">Pricing</h1>
+  <p style="font-size:20px;line-height:1.4;color:var(--text-2);max-width:640px;margin:0">One fee on released funds. Yours on top, capped by the contract. Nothing charged on an escrow that is cancelled or expires.</p>
+</div><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">The protocol fee</h2><p style="font-family:var(--font-mono);font-variant-numeric:tabular-nums;font-size:clamp(40px,5vw,56px);line-height:1;margin:8px 0;color:var(--text)">0.5 <span style="font-size:24px;color:var(--text-muted)">%</span></p><p style="margin:0;max-width:640px">Charged on released funds, collected by the contract at release, and capped at <span style="font-family:var(--font-mono)">1 000 USD</span> per escrow, so a large transaction never pays more than that. No subscription, no minimum, no token to hold, and nothing to pay on an escrow that never settles.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Your fees</h2><p style="margin:0;max-width:640px">Four optional fees you configure per escrow, routed to an address you nominate and settled in the same transaction as the release. Only the protocol fee is mandatory. Set the rest to zero if you would rather not charge them.</p><table style="width:100%;max-width:760px;border-collapse:collapse;font-size:14px;line-height:1.5;margin:8px 0">
+<thead><tr><th scope="col" style="text-align:left;padding:10px 16px 10px 0;font-size:12px;font-weight:500;color:var(--text-muted);border-bottom:1px solid var(--border-input)">Fee</th><th scope="col" style="text-align:left;padding:10px 16px 10px 0;font-size:12px;font-weight:500;color:var(--text-muted);border-bottom:1px solid var(--border-input)">Set by</th><th scope="col" style="text-align:left;padding:10px 16px 10px 0;font-size:12px;font-weight:500;color:var(--text-muted);border-bottom:1px solid var(--border-input)">Charged</th></tr></thead>
+<tbody><tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Protocol</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Hokan</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">On release</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Funding</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">You</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">When the escrow is funded</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Release</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">You</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">On release</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Dispute</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">You</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">On resolution only, never on the fallback</td></tr>
+<tr><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;font-weight:500;color:var(--text);white-space:nowrap">Network</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Cardano</td><td style="padding:12px 16px 12px 0;border-bottom:1px solid var(--border);vertical-align:top;color:var(--text-2)">Per transaction</td></tr></tbody></table><div style="display:flex;flex-direction:column;gap:32px;margin-top:16px"><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">The total is capped by the contract</h3><p style="margin:0;max-width:640px">Your combined fees cannot exceed the ceiling, and the validator rejects the transaction if they do. A platform cannot quietly move past it, and that includes us.</p></div>
+</div><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">The schedule freezes when the escrow is funded</h3><p style="margin:0;max-width:640px">Every fee is set at creation and locked the moment money arrives, so the depositor sees the complete breakdown in the transaction they sign. A later pricing change reaches new escrows only.</p></div>
+</div></div>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Paying for API access</h2><p style="margin:0;max-width:640px">Two paths, and they are complements rather than tiers of the same thing.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Plans</h3><p style="margin:0;max-width:640px">Conventional recurring billing in fiat, invoiced, for teams and companies who need something a finance department can process. Includes a sandbox and testnet access from signup.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Per call</h3><p style="margin:0;max-width:640px">For agents and for anyone who does not want an account, using the x402 standard so there is no signup form in the way. An agent cannot complete a signup form, which is the whole reason this path exists.</p><p style="margin:0;max-width:640px">Neither affects the protocol fee. The contract collects that at release regardless of how you paid for the API request, which is also why an integrator building their own transactions pays exactly what an integrator using our SDK pays.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Card" padding="32" hint-size="100%,200px"><div style="display:flex;flex-direction:column;gap:16px"><h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">See the number before you commit</h2><p style="margin:0;max-width:640px">The quote endpoint returns a full breakdown and signs nothing. Call it, show your user exactly what they will pay, and nothing is committed until somebody signs a transaction.</p><p style="margin:0;max-width:640px"><a href="#docs">Read the quote endpoint</a></p></div></x-import>
+  </main>
+
+  <footer style="border-top:1px solid var(--border);padding:48px clamp(20px,6vw,80px) 64px;font-size:14px;color:var(--text-2)">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-wrap:wrap;gap:40px 64px;justify-content:space-between;align-items:flex-start">
+        <div style="display:flex;flex-wrap:wrap;gap:40px 64px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Product</div>
+            <a href="how-it-works.dc.html" style="color:var(--text-2);text-decoration:none">How it works</a>
+            <a href="architecture.dc.html" style="color:var(--text-2);text-decoration:none">Architecture</a>
+            <a href="use-cases.dc.html" style="color:var(--text-2);text-decoration:none">Use cases</a>
+            <a href="pricing.dc.html" style="color:var(--text-2);text-decoration:none">Pricing</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Developers</div>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Documentation</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">API reference</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Sandbox</a>
+            <a href="#repo" style="color:var(--text-2);text-decoration:none">Contracts</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Trust</div>
+            <a href="trust.dc.html" style="color:var(--text-2);text-decoration:none">Security</a>
+            <a href="trust.dc.html#audit" style="color:var(--text-2);text-decoration:none">Audit</a>
+            <a href="trust.dc.html#faq" style="color:var(--text-2);text-decoration:none">Questions</a>
+            <a href="#status" style="color:var(--text-2);text-decoration:none">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" style="height:24px;display:block">
+      </div>
+      <p style="margin:0;max-width:46ch;color:var(--text-muted)">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;\&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Appearance&quot;},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "light",
+      showNotes: this.props.showNotes ?? true,
+      bar: {
+        links: [
+          { label: "How it works", href: "how-it-works.dc.html" },
+          { label: "Architecture", href: "architecture.dc.html" },
+          { label: "Use cases", href: "use-cases.dc.html" },
+          { label: "Pricing", href: "pricing.dc.html" },
+          { label: "Trust", href: "trust.dc.html" },
+          { label: "Docs", href: "#docs" }
+        ],
+        active: "Pricing",
+        style: { padding: "0 clamp(20px,6vw,80px)" }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

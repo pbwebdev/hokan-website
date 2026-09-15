@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/base.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/styles.css">
+<script src="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--page);color:var(--text);font-family:var(--font-sans);text-wrap:pretty} a{color:var(--text);text-decoration-color:var(--clay-400);text-underline-offset:3px} a:hover{color:var(--accent);text-decoration-color:currentColor}</style>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="Use cases" style="background:var(--page);color:var(--text);min-height:100vh;font-family:var(--font-sans);font-size:16px;line-height:1.55">
+  <x-import component-from-global-scope="HokanDesignSystem_3594b4.TopBar" dc-props="{{ bar }}" hint-size="100%,56px"></x-import>
+
+  <main style="max-width:1120px;margin:0 auto;padding:64px clamp(20px,6vw,80px) 96px">
+<div style="display:flex;flex-direction:column;gap:16px;margin-bottom:64px">
+  <h1 style="font-family:var(--font-display);font-weight:400;font-size:clamp(36px,5vw,48px);line-height:1.05;letter-spacing:-0.01em;margin:0;max-width:20ch">What people build on it</h1>
+  <p style="font-size:20px;line-height:1.4;color:var(--text-2);max-width:640px;margin:0">The same contract underneath all of these. What changes is who holds which role and what the release condition is.</p>
+</div><div style="border-top:1px solid var(--border-input)"><div style="display:flex;flex-wrap:wrap;gap:12px 40px;padding:32px 0;border-bottom:1px solid var(--border)">
+  <h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;font-size:20px;line-height:1.3;flex:0 0 240px;max-width:100%">Bounties and open source</h3>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:12px"><p style="margin:0;max-width:640px">A project funds a bounty before anyone starts, so contributors can see the money is real rather than promised. Payment releases on merge or on maintainer approval.</p><p style="margin:0;max-width:640px">No trust is required between a maintainer in Berlin and a contributor in Manila, and the contributor does not need to already hold ada to get paid.</p><p style="margin:0;max-width:640px">This is the one we run ourselves, as a customer of the same public API you would use.</p></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 40px;padding:32px 0;border-bottom:1px solid var(--border)">
+  <h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;font-size:20px;line-height:1.3;flex:0 0 240px;max-width:100%">Freelance and agency milestones</h3>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:12px"><p style="margin:0;max-width:640px">A client locks the full project value and releases it milestone by milestone. The freelancer can verify the money exists before starting. The client knows none of it moves until work lands.</p><p style="margin:0;max-width:640px">Worth comparing against the ten to twenty three per cent that centralised freelance platforms take, and against how those platforms decide disputes.</p></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 40px;padding:32px 0;border-bottom:1px solid var(--border)">
+  <h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;font-size:20px;line-height:1.3;flex:0 0 240px;max-width:100%">Marketplace transactions</h3>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:12px"><p style="margin:0;max-width:640px">Goods, digital assets or services. Funds hold until delivery is confirmed or a challenge window closes, and your commission routes in the same transaction as the release.</p><p style="margin:0;max-width:640px">You keep the customer relationship, the branding and the dispute decision. We are not building a marketplace to compete with yours.</p></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 40px;padding:32px 0;border-bottom:1px solid var(--border)">
+  <h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;font-size:20px;line-height:1.3;flex:0 0 240px;max-width:100%">Security deposits and bonds</h3>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:12px"><p style="margin:0;max-width:640px">Rentals, equipment hire, event bookings, contractor bonds. The deposit returns automatically unless a valid claim is raised before the deadline.</p><p style="margin:0;max-width:640px">Refund by default removes the most common source of deposit disputes, which is not disagreement about damage but the holder simply not giving the money back.</p></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 40px;padding:32px 0;border-bottom:1px solid var(--border)">
+  <h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;font-size:20px;line-height:1.3;flex:0 0 240px;max-width:100%">Grants and milestone funding</h3>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:12px"><p style="margin:0;max-width:640px">Funds locked per milestone rather than paid up front, with reviewers approving on chain. The funding body and the public can both audit what was released and when, without trusting a report.</p><p style="margin:0;max-width:640px">Directly applicable to treasury and grant programmes, including Catalyst.</p></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 40px;padding:32px 0;border-bottom:1px solid var(--border)">
+  <h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;font-size:20px;line-height:1.3;flex:0 0 240px;max-width:100%">Agent commerce</h3>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:12px"><p style="margin:0;max-width:640px">An agent commissions work from another agent or from a person. Escrow holds the value and releases against a condition, which is what agent payments need and what a one shot payment cannot do.</p><p style="margin:0;max-width:640px">Neither party needs a legal relationship or a shared jurisdiction. Our agent tooling proposes transactions and never signs them.</p></div>
+</div>
+<div style="display:flex;flex-wrap:wrap;gap:12px 40px;padding:32px 0;border-bottom:1px solid var(--border)">
+  <h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;font-size:20px;line-height:1.3;flex:0 0 240px;max-width:100%">Peer to peer and OTC</h3>
+  <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:12px"><p style="margin:0;max-width:640px">Two people who found each other on Discord and have no reason to trust one another. Cheaper and faster than an incorporated escrow agent, with terms both sides can read before committing.</p></div>
+</div></div><div style="margin-top:64px"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Not sure which shape fits</h2><p style="margin:0;max-width:640px">The question that usually settles it is who approves and what they are approving. If you can answer that, the rest of the configuration follows. The quote endpoint will price it for you before you commit to anything.</p><p style="margin:0;max-width:640px"><a href="#docs">Read the integration guides</a></p>
+</section></div>
+  </main>
+
+  <footer style="border-top:1px solid var(--border);padding:48px clamp(20px,6vw,80px) 64px;font-size:14px;color:var(--text-2)">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-wrap:wrap;gap:40px 64px;justify-content:space-between;align-items:flex-start">
+        <div style="display:flex;flex-wrap:wrap;gap:40px 64px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Product</div>
+            <a href="how-it-works.dc.html" style="color:var(--text-2);text-decoration:none">How it works</a>
+            <a href="architecture.dc.html" style="color:var(--text-2);text-decoration:none">Architecture</a>
+            <a href="use-cases.dc.html" style="color:var(--text-2);text-decoration:none">Use cases</a>
+            <a href="pricing.dc.html" style="color:var(--text-2);text-decoration:none">Pricing</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Developers</div>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Documentation</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">API reference</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Sandbox</a>
+            <a href="#repo" style="color:var(--text-2);text-decoration:none">Contracts</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Trust</div>
+            <a href="trust.dc.html" style="color:var(--text-2);text-decoration:none">Security</a>
+            <a href="trust.dc.html#audit" style="color:var(--text-2);text-decoration:none">Audit</a>
+            <a href="trust.dc.html#faq" style="color:var(--text-2);text-decoration:none">Questions</a>
+            <a href="#status" style="color:var(--text-2);text-decoration:none">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" style="height:24px;display:block">
+      </div>
+      <p style="margin:0;max-width:46ch;color:var(--text-muted)">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;\&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Appearance&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "light",
+      bar: {
+        links: [
+          { label: "How it works", href: "how-it-works.dc.html" },
+          { label: "Architecture", href: "architecture.dc.html" },
+          { label: "Use cases", href: "use-cases.dc.html" },
+          { label: "Pricing", href: "pricing.dc.html" },
+          { label: "Trust", href: "trust.dc.html" },
+          { label: "Docs", href: "#docs" }
+        ],
+        active: "Use cases",
+        style: { padding: "0 clamp(20px,6vw,80px)" }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

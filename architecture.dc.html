@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/base.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/styles.css">
+<script src="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--page);color:var(--text);font-family:var(--font-sans);text-wrap:pretty} a{color:var(--text);text-decoration-color:var(--clay-400);text-underline-offset:3px} a:hover{color:var(--accent);text-decoration-color:currentColor}</style>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="Architecture" style="background:var(--page);color:var(--text);min-height:100vh;font-family:var(--font-sans);font-size:16px;line-height:1.55">
+  <x-import component-from-global-scope="HokanDesignSystem_3594b4.TopBar" dc-props="{{ bar }}" hint-size="100%,56px"></x-import>
+
+  <main style="max-width:1120px;margin:0 auto;padding:64px clamp(20px,6vw,80px) 96px">
+<div style="display:flex;flex-direction:column;gap:16px;margin-bottom:64px">
+  <h1 style="font-family:var(--font-display);font-weight:400;font-size:clamp(36px,5vw,48px);line-height:1.05;letter-spacing:-0.01em;margin:0;max-width:20ch">Architecture</h1>
+  <p style="font-size:20px;line-height:1.4;color:var(--text-2);max-width:640px;margin:0">One contract on Cardano, one hosted API, and a chain follower that tells you when something changed. Everything else is detail.</p>
+</div><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">On chain</h2><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">The validator</h3><p style="margin:0;max-width:640px">One script and one address, holding the rules for every escrow on the protocol. Almost nothing is compiled into it, because a validator with customer-specific parameters baked in is a validator you cannot change without moving everyone’s money. Ours carries only what it cannot function without.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">The escrow</h3><p style="margin:0;max-width:640px">Each escrow is a single output carrying its funds, its terms, and a token minted when it was created. That token is the escrow’s identity. On Cardano an output reference changes every time the escrow moves, so the token is what lets you follow one escrow across its whole life and what stops anything else claiming to be it. It is burned when the escrow ends.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Configuration, and why it cannot reach your money</h3><p style="margin:0;max-width:640px">Fee destinations, caps and minimum sizes live in a separate output the validator reads without consuming. Because it is read rather than spent, every escrow in existence can reference it at once with no contention.</p><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><p style="margin:0;max-width:640px">The part that matters is what happens to those values when you create an escrow. They are copied into your escrow’s terms at that moment and frozen there, and every later step reads your copy rather than the live one. There is no configuration change we can make that reaches money already in the contract.</p></div>
+</div>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Off chain</h2><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Transaction building</h3><p style="margin:0;max-width:640px">You describe what you want. We validate it, build the complete transaction server side, and hand it back unsigned. Signing happens in your wallet, never on our infrastructure, and the transaction you inspect is the transaction that settles.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">The chain follower</h3><p style="margin:0;max-width:640px">Rollback aware, watching the one script address, reconciling continuously against chain state. The chain is the source of truth and our database is a cache.</p><p style="margin:0;max-width:640px">That distinction is load bearing rather than philosophical. It means transactions built by other people are normal traffic rather than anomalies, which is what makes this genuinely open infrastructure instead of infrastructure that is open in principle and brittle in practice.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Events</h3><p style="margin:0;max-width:640px">Signed webhooks, delivered at least once, with idempotency keys. An invariant checker reconciles our projection against the chain continuously, so a disagreement between the two surfaces as an alarm rather than as a support ticket.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Paying someone with an empty wallet</h2><p style="margin:0;max-width:640px">A stablecoin payout on Cardano has to carry a small amount of ada with it. We treat that as the recipient’s first transaction fee rather than as a cost to minimise, because a payment somebody cannot move is not a payment.</p><p style="margin:0;max-width:640px">A pool-funded sponsor address supplies it. The sponsor is never a required signer on a refund or a fallback path, because anything that must sign an exit path is something that can block one.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Versioning</h2><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><p style="margin:0;max-width:640px">A change to any rule produces a new script and a new address. Both stay live. We do not migrate funds between versions, ever, for any reason, including our own convenience.</p></div>
+</div><p style="margin:0;max-width:640px">The consequence we accept is that every version we ship is a version we operate permanently, and historical reference scripts stay funded indefinitely. That is the correct trade, because the alternative is a protocol with a function that moves your money without your signature. Nothing is worth having that function.</p><p style="margin:0;max-width:640px">API versioning is a separate promise and we publish it in full: what counts as a breaking change, how long a version is supported, and how much notice you get. Escrow integrations are expensive to rewrite and you should know the terms before you build.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Card" padding="32" hint-size="100%,200px"><div style="display:flex;flex-direction:column;gap:16px"><h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">What we deliberately did not build</h2><p style="margin:0;max-width:640px">No custody. No per-customer contracts. No administrative override. No token, so there is nothing to buy, stake or farm, and the protocol’s economics do not depend on a price.</p><p style="margin:0;max-width:640px">And no marketplace. We run a bounty platform on Hokan as a customer of our own API, and it holds no privileges over yours. We are not competing with you for your users.</p></div></x-import>
+  </main>
+
+  <footer style="border-top:1px solid var(--border);padding:48px clamp(20px,6vw,80px) 64px;font-size:14px;color:var(--text-2)">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-wrap:wrap;gap:40px 64px;justify-content:space-between;align-items:flex-start">
+        <div style="display:flex;flex-wrap:wrap;gap:40px 64px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Product</div>
+            <a href="how-it-works.dc.html" style="color:var(--text-2);text-decoration:none">How it works</a>
+            <a href="architecture.dc.html" style="color:var(--text-2);text-decoration:none">Architecture</a>
+            <a href="use-cases.dc.html" style="color:var(--text-2);text-decoration:none">Use cases</a>
+            <a href="pricing.dc.html" style="color:var(--text-2);text-decoration:none">Pricing</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Developers</div>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Documentation</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">API reference</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Sandbox</a>
+            <a href="#repo" style="color:var(--text-2);text-decoration:none">Contracts</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Trust</div>
+            <a href="trust.dc.html" style="color:var(--text-2);text-decoration:none">Security</a>
+            <a href="trust.dc.html#audit" style="color:var(--text-2);text-decoration:none">Audit</a>
+            <a href="trust.dc.html#faq" style="color:var(--text-2);text-decoration:none">Questions</a>
+            <a href="#status" style="color:var(--text-2);text-decoration:none">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" style="height:24px;display:block">
+      </div>
+      <p style="margin:0;max-width:46ch;color:var(--text-muted)">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;\&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Appearance&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "light",
+      bar: {
+        links: [
+          { label: "How it works", href: "how-it-works.dc.html" },
+          { label: "Architecture", href: "architecture.dc.html" },
+          { label: "Use cases", href: "use-cases.dc.html" },
+          { label: "Pricing", href: "pricing.dc.html" },
+          { label: "Trust", href: "trust.dc.html" },
+          { label: "Docs", href: "#docs" }
+        ],
+        active: "Architecture",
+        style: { padding: "0 clamp(20px,6vw,80px)" }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

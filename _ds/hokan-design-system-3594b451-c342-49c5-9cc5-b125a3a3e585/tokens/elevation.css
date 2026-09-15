@@ -1,0 +1,9 @@
+:root {
+  --radius-sm: 4px; --radius-md: 6px; /* never 12px or above */
+  --hairline: 1px; --hairline-fine: 0.5px;
+  --shadow-none: none; /* flat surfaces; no drop shadows beyond a 1px hairline */
+  --ring: 0 0 0 2px var(--focus-ring);
+  --ring-offset: 0 0 0 2px var(--page), 0 0 0 4px var(--focus-ring);
+  --motion-fast: 120ms; /* @kind other */ --motion-base: 180ms; /* @kind other */ /* fades under 200ms */
+  --ease: cubic-bezier(.2,0,0,1); /* @kind other */
+}

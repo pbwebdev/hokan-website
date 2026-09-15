@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/colors.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/typography.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/elevation.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/tokens/base.css">
+<link rel="stylesheet" href="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/styles.css">
+<script src="_ds/hokan-design-system-3594b451-c342-49c5-9cc5-b125a3a3e585/_ds_bundle.js"></script>
+<style>body{margin:0;background:var(--page);color:var(--text);font-family:var(--font-sans);text-wrap:pretty} a{color:var(--text);text-decoration-color:var(--clay-400);text-underline-offset:3px} a:hover{color:var(--accent);text-decoration-color:currentColor}</style>
+</helmet>
+<div data-theme="{{ theme }}" data-screen-label="Trust" style="background:var(--page);color:var(--text);min-height:100vh;font-family:var(--font-sans);font-size:16px;line-height:1.55">
+  <x-import component-from-global-scope="HokanDesignSystem_3594b4.TopBar" dc-props="{{ bar }}" hint-size="100%,56px"></x-import>
+
+  <main style="max-width:1120px;margin:0 auto;padding:64px clamp(20px,6vw,80px) 96px">
+<div style="display:flex;flex-direction:column;gap:16px;margin-bottom:64px">
+  <h1 style="font-family:var(--font-display);font-weight:400;font-size:clamp(36px,5vw,48px);line-height:1.05;letter-spacing:-0.01em;margin:0;max-width:20ch">What we can and cannot do</h1>
+  <p style="font-size:20px;line-height:1.4;color:var(--text-2);max-width:640px;margin:0">Most of this category asks you to trust a team. The useful version of this page is the list of things that hold even if you do not.</p>
+</div><section style="display:flex;flex-direction:column;gap:16px">
+<div style="display:flex;gap:32px;flex-wrap:wrap;font-size:13px;color:var(--text-2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0;margin-bottom:16px;max-width:672px">
+  <span style="display:inline-flex;align-items:center;gap:10px"><i style="width:12px;height:12px;background:var(--text);border-radius:2px"></i>Enforced by the validator</span>
+  <span style="display:inline-flex;align-items:center;gap:10px"><i style="width:12px;height:12px;border:1.5px solid var(--border-input);border-radius:2px;box-sizing:border-box"></i>Operational commitment</span>
+</div><div style="display:flex;flex-direction:column;gap:32px"><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">We cannot move your funds</h3><p style="margin:0;max-width:640px">There is no administrative function in the contract that sweeps or redirects an escrow. Every write returns an unsigned transaction and your wallet signs it. We do not hold end user keys, and holding them is not a setting we could switch on.</p></div>
+</div><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">We cannot trap your funds</h3><p style="margin:0;max-width:640px">Every state has a path to settlement that does not need us, the resolver, or the other party to cooperate. If we went offline permanently, open escrows would still resolve, because the rules are on chain and anyone can build the transaction.</p></div>
+</div><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;background:var(--text);border-radius:2px;margin-top:5px"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">We cannot change the terms after you fund</h3><p style="margin:0;max-width:640px">Fees and caps are copied into your escrow when it is created and frozen when it is funded. Nothing we change afterwards reaches it.</p></div>
+</div><div style="display:grid;grid-template-columns:32px 1fr;align-items:start;max-width:672px">
+  <i style="width:14px;height:14px;border:1.5px solid var(--border-input);border-radius:2px;margin-top:5px;box-sizing:border-box"></i>
+  <div style="display:flex;flex-direction:column;gap:8px"><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0">We publish what breaks</h3><p style="margin:0;max-width:640px">An operational commitment. Incidents, their cause and what changed afterwards go on the status page rather than into a support queue.</p></div>
+</div></div>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section id="audit" style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Audit</h2><sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><p style="font-family:var(--font-mono);font-size:13px;line-height:1.5;color:var(--text-muted);margin:0;max-width:640px;padding:12px 16px;border:1px dashed var(--border-input);border-radius:4px"><span style="text-transform:uppercase;letter-spacing:0.04em">Note before publishing</span> — Do not publish this section until the facts are real. State the stage plainly: “Specification frozen. Audit engaged with [firm], report due [month].” Silence reads worse, and an implied audit is the one claim on this site that will be checked.</p></sc-if><p style="margin:0;max-width:640px">Scope covers the validator, the minting policies, the configuration mechanism and the off chain transaction builder. The builder is in scope deliberately, because published audits of comparable systems keep finding issues in exactly that layer, and leaving it out would make the audit look more complete than it was.</p><p style="margin:0;max-width:640px">Auditors work against the state transition table and the threat model at a specific commit, both of which are written before the contract rather than reconstructed after it.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Reporting a vulnerability</h2><p style="margin:0;max-width:640px">Report privately to <span style="font-family:var(--font-mono);font-size:15px">security@[domain]</span> rather than opening an issue. We acknowledge within two business days and aim to give an assessment within ten.</p><p style="margin:0;max-width:640px">We will not take legal action against good faith research that stays in scope, avoids privacy violations and service degradation, and gives us reasonable time before disclosure.</p><p style="margin:0;max-width:640px">We hold ourselves to the same standard. Where our own research finds a vulnerability in another project, we notify them privately and give them time to respond before we publish anything, including internally circulated documents that describe the issue in reproducible detail.</p>
+</section><hr style="border:0;border-top:1px solid var(--border);margin:64px 0"><section id="faq" style="display:flex;flex-direction:column;gap:16px">
+<h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Questions people actually ask</h2><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">What happens if Hokan shuts down?</h3><p style="margin:0;max-width:640px">Open escrows resolve without us. The rules live in the contract, the transactions can be built by anyone, and the exit paths do not require our signature. You would lose the API, the webhooks and the support, not the money.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Can you freeze my escrow?</h3><p style="margin:0;max-width:640px">No. We can stop new escrows being created on a version, which exists so we can halt a compromised version without trapping anyone, and that flag has no effect on escrows that already exist.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Who resolves disputes?</h3><p style="margin:0;max-width:640px">Whoever you nominate, which defaults to you rather than to us. Whoever it is can only split the money between the two parties already named in the escrow, and loses the ability to act at all once the window expires.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Is there a token?</h3><p style="margin:0;max-width:640px">No. Nothing to buy, stake or farm. Our revenue is a fee on settled work, which means we only earn when the protocol is actually used.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Do I need to understand Cardano?</h3><p style="margin:0;max-width:640px">To integrate, no. You call an API and hand the returned transaction to a wallet. To evaluate whether the guarantees are real, some, and the contract source and the specification are public so you can check rather than take our word for it.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Can I build my own transactions?</h3><p style="margin:0;max-width:640px">Yes, and the system assumes you will. The contract does not care who assembled a transaction, only whether it satisfies the rules. Anything that only works because we built it would not be a protocol.</p><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">What assets are supported?</h3><sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><p style="font-family:var(--font-mono);font-size:13px;line-height:1.5;color:var(--text-muted);margin:0;max-width:640px;padding:12px 16px;border:1px dashed var(--border-input);border-radius:4px"><span style="text-transform:uppercase;letter-spacing:0.04em">Note before publishing</span> — Confirm and list. Ada, native assets, stablecoins.</p></sc-if><h3 style="font-size:18px;line-height:1.35;font-weight:500;margin:0;margin-top:16px">Are you a money transmitter?</h3><sc-if value="{{ showNotes }}" hint-placeholder-val="{{ true }}"><p style="font-family:var(--font-mono);font-size:13px;line-height:1.5;color:var(--text-muted);margin:0;max-width:640px;padding:12px 16px;border:1px dashed var(--border-input);border-radius:4px"><span style="text-transform:uppercase;letter-spacing:0.04em">Note before publishing</span> — Answer only once counsel has signed off. The non-custodial architecture is the whole basis of the answer, so it needs to be worded by a lawyer rather than by a marketer.</p></sc-if>
+</section>
+  </main>
+
+  <footer style="border-top:1px solid var(--border);padding:48px clamp(20px,6vw,80px) 64px;font-size:14px;color:var(--text-2)">
+    <div style="max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px">
+      <div style="display:flex;flex-wrap:wrap;gap:40px 64px;justify-content:space-between;align-items:flex-start">
+        <div style="display:flex;flex-wrap:wrap;gap:40px 64px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Product</div>
+            <a href="how-it-works.dc.html" style="color:var(--text-2);text-decoration:none">How it works</a>
+            <a href="architecture.dc.html" style="color:var(--text-2);text-decoration:none">Architecture</a>
+            <a href="use-cases.dc.html" style="color:var(--text-2);text-decoration:none">Use cases</a>
+            <a href="pricing.dc.html" style="color:var(--text-2);text-decoration:none">Pricing</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Developers</div>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Documentation</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">API reference</a>
+            <a href="#docs" style="color:var(--text-2);text-decoration:none">Sandbox</a>
+            <a href="#repo" style="color:var(--text-2);text-decoration:none">Contracts</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-weight:500;color:var(--text);margin-bottom:4px">Trust</div>
+            <a href="trust.dc.html" style="color:var(--text-2);text-decoration:none">Security</a>
+            <a href="trust.dc.html#audit" style="color:var(--text-2);text-decoration:none">Audit</a>
+            <a href="trust.dc.html#faq" style="color:var(--text-2);text-decoration:none">Questions</a>
+            <a href="#status" style="color:var(--text-2);text-decoration:none">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" style="height:24px;display:block">
+      </div>
+      <p style="margin:0;max-width:46ch;color:var(--text-muted)">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;\&quot;light\&quot; | \&quot;dark\&quot;&quot;,&quot;section&quot;:&quot;Appearance&quot;},&quot;showNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: this.props.theme ?? "light",
+      showNotes: this.props.showNotes ?? true,
+      bar: {
+        links: [
+          { label: "How it works", href: "how-it-works.dc.html" },
+          { label: "Architecture", href: "architecture.dc.html" },
+          { label: "Use cases", href: "use-cases.dc.html" },
+          { label: "Pricing", href: "pricing.dc.html" },
+          { label: "Trust", href: "trust.dc.html" },
+          { label: "Docs", href: "#docs" }
+        ],
+        active: "Trust",
+        style: { padding: "0 clamp(20px,6vw,80px)" }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
