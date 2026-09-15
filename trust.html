@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trust — Hokan</title>
+<meta name="description" content="What Hokan can and cannot do. The list of guarantees that hold whether or not you trust the team, because the validator enforces them.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hokan">
+<meta property="og:title" content="Trust — Hokan">
+<meta property="og:description" content="What Hokan can and cannot do. The list of guarantees that hold whether or not you trust the team, because the validator enforces them.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<!-- Built by tools/build.mjs from trust.dc.html. Edit the design source, not this file. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+    <a class="brand" href="index.html" aria-label="Hokan home">
+      <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
+        <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
+        <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
+      </svg>
+      <span class="brand__word">hokan</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Primary">
+      <a href="how-it-works.html">How it works</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="trust.html" aria-current="page">Trust</a>
+      <a href="#docs">Docs</a>
+    </nav>
+  </header>
+
+  <main id="main">
+<div class="page">
+<div class="page-head">
+  <h1 class="page-title">What we can and cannot do</h1>
+  <p class="lead">Most of this category asks you to trust a team. The useful version of this page is the list of things that hold even if you do not.</p>
+</div><section class="stack-16">
+<div class="legend legend--tight">
+  <span class="legend__item"><i class="seal seal--filled seal--sm"></i>Enforced by the validator</span>
+  <span class="legend__item"><i class="seal seal--outline seal--sm"></i>Operational commitment</span>
+</div><div class="stack-32"><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><h3 class="h3">We cannot move your funds</h3><p class="copy">There is no administrative function in the contract that sweeps or redirects an escrow. Every write returns an unsigned transaction and your wallet signs it. We do not hold end user keys, and holding them is not a setting we could switch on.</p></div>
+</div><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><h3 class="h3">We cannot trap your funds</h3><p class="copy">Every state has a path to settlement that does not need us, the resolver, or the other party to cooperate. If we went offline permanently, open escrows would still resolve, because the rules are on chain and anyone can build the transaction.</p></div>
+</div><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><h3 class="h3">We cannot change the terms after you fund</h3><p class="copy">Fees and caps are copied into your escrow when it is created and frozen when it is funded. Nothing we change afterwards reaches it.</p></div>
+</div><div class="claim">
+  <i class="seal seal--outline"></i>
+  <div class="stack-8"><h3 class="h3">We publish what breaks</h3><p class="copy">An operational commitment. Incidents, their cause and what changed afterwards go on the status page rather than into a support queue.</p></div>
+</div></div>
+</section><hr class="rule"><section id="audit" class="stack-16">
+<h2 class="section-title">Audit</h2><p class="copy">Scope covers the validator, the minting policies, the configuration mechanism and the off chain transaction builder. The builder is in scope deliberately, because published audits of comparable systems keep finding issues in exactly that layer, and leaving it out would make the audit look more complete than it was.</p><p class="copy">Auditors work against the state transition table and the threat model at a specific commit, both of which are written before the contract rather than reconstructed after it.</p>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Reporting a vulnerability</h2><p class="copy">Report privately to <span class="mono-amt">security@[domain]</span> rather than opening an issue. We acknowledge within two business days and aim to give an assessment within ten.</p><p class="copy">We will not take legal action against good faith research that stays in scope, avoids privacy violations and service degradation, and gives us reasonable time before disclosure.</p><p class="copy">We hold ourselves to the same standard. Where our own research finds a vulnerability in another project, we notify them privately and give them time to respond before we publish anything, including internally circulated documents that describe the issue in reproducible detail.</p>
+</section><hr class="rule"><section id="faq" class="stack-16">
+<h2 class="section-title">Questions people actually ask</h2><h3 class="h3 h3--spaced">What happens if Hokan shuts down?</h3><p class="copy">Open escrows resolve without us. The rules live in the contract, the transactions can be built by anyone, and the exit paths do not require our signature. You would lose the API, the webhooks and the support, not the money.</p><h3 class="h3 h3--spaced">Can you freeze my escrow?</h3><p class="copy">No. We can stop new escrows being created on a version, which exists so we can halt a compromised version without trapping anyone, and that flag has no effect on escrows that already exist.</p><h3 class="h3 h3--spaced">Who resolves disputes?</h3><p class="copy">Whoever you nominate, which defaults to you rather than to us. Whoever it is can only split the money between the two parties already named in the escrow, and loses the ability to act at all once the window expires.</p><h3 class="h3 h3--spaced">Is there a token?</h3><p class="copy">No. Nothing to buy, stake or farm. Our revenue is a fee on settled work, which means we only earn when the protocol is actually used.</p><h3 class="h3 h3--spaced">Do I need to understand Cardano?</h3><p class="copy">To integrate, no. You call an API and hand the returned transaction to a wallet. To evaluate whether the guarantees are real, some, and the contract source and the specification are public so you can check rather than take our word for it.</p><h3 class="h3 h3--spaced">Can I build my own transactions?</h3><p class="copy">Yes, and the system assumes you will. The contract does not care who assembled a transaction, only whether it satisfies the rules. Anything that only works because we built it would not be a protocol.</p><!-- "What assets are supported?" is unpublished: the design carries only a pre-publication note here. --><!-- "Are you a money transmitter?" is unpublished: the design carries only a pre-publication note here. -->
+</section>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-top">
+        <div class="footer-cols">
+          <div class="stack-8">
+            <div class="footer-col__title">Product</div>
+            <a href="how-it-works.html" class="footer-link">How it works</a>
+            <a href="architecture.html" class="footer-link">Architecture</a>
+            <a href="use-cases.html" class="footer-link">Use cases</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Developers</div>
+            <a href="#docs" class="footer-link">Documentation</a>
+            <a href="#docs" class="footer-link">API reference</a>
+            <a href="#docs" class="footer-link">Sandbox</a>
+            <a href="#repo" class="footer-link">Contracts</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Trust</div>
+            <a href="trust.html" class="footer-link">Security</a>
+            <a href="trust.html#audit" class="footer-link">Audit</a>
+            <a href="trust.html#faq" class="footer-link">Questions</a>
+            <a href="#status" class="footer-link">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" class="cardano-lockup">
+      </div>
+      <p class="footer-note">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

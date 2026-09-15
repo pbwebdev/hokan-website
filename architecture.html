@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Architecture — Hokan</title>
+<meta name="description" content="One contract on Cardano, one hosted API, and a chain follower that tells you when something changed. Everything else is detail.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hokan">
+<meta property="og:title" content="Architecture — Hokan">
+<meta property="og:description" content="One contract on Cardano, one hosted API, and a chain follower that tells you when something changed. Everything else is detail.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<!-- Built by tools/build.mjs from architecture.dc.html. Edit the design source, not this file. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+    <a class="brand" href="index.html" aria-label="Hokan home">
+      <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
+        <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
+        <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
+      </svg>
+      <span class="brand__word">hokan</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Primary">
+      <a href="how-it-works.html">How it works</a>
+      <a href="architecture.html" aria-current="page">Architecture</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="trust.html">Trust</a>
+      <a href="#docs">Docs</a>
+    </nav>
+  </header>
+
+  <main id="main">
+<div class="page">
+<div class="page-head">
+  <h1 class="page-title">Architecture</h1>
+  <p class="lead">One contract on Cardano, one hosted API, and a chain follower that tells you when something changed. Everything else is detail.</p>
+</div><section class="stack-16">
+<h2 class="section-title">On chain</h2><h3 class="h3 h3--spaced">The validator</h3><p class="copy">One script and one address, holding the rules for every escrow on the protocol. Almost nothing is compiled into it, because a validator with customer-specific parameters baked in is a validator you cannot change without moving everyone’s money. Ours carries only what it cannot function without.</p><h3 class="h3 h3--spaced">The escrow</h3><p class="copy">Each escrow is a single output carrying its funds, its terms, and a token minted when it was created. That token is the escrow’s identity. On Cardano an output reference changes every time the escrow moves, so the token is what lets you follow one escrow across its whole life and what stops anything else claiming to be it. It is burned when the escrow ends.</p><h3 class="h3 h3--spaced">Configuration, and why it cannot reach your money</h3><p class="copy">Fee destinations, caps and minimum sizes live in a separate output the validator reads without consuming. Because it is read rather than spent, every escrow in existence can reference it at once with no contention.</p><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><p class="copy">The part that matters is what happens to those values when you create an escrow. They are copied into your escrow’s terms at that moment and frozen there, and every later step reads your copy rather than the live one. There is no configuration change we can make that reaches money already in the contract.</p></div>
+</div>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Off chain</h2><h3 class="h3 h3--spaced">Transaction building</h3><p class="copy">You describe what you want. We validate it, build the complete transaction server side, and hand it back unsigned. Signing happens in your wallet, never on our infrastructure, and the transaction you inspect is the transaction that settles.</p><h3 class="h3 h3--spaced">The chain follower</h3><p class="copy">Rollback aware, watching the one script address, reconciling continuously against chain state. The chain is the source of truth and our database is a cache.</p><p class="copy">That distinction is load bearing rather than philosophical. It means transactions built by other people are normal traffic rather than anomalies, which is what makes this genuinely open infrastructure instead of infrastructure that is open in principle and brittle in practice.</p><h3 class="h3 h3--spaced">Events</h3><p class="copy">Signed webhooks, delivered at least once, with idempotency keys. An invariant checker reconciles our projection against the chain continuously, so a disagreement between the two surfaces as an alarm rather than as a support ticket.</p>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Paying someone with an empty wallet</h2><p class="copy">A stablecoin payout on Cardano has to carry a small amount of ada with it. We treat that as the recipient’s first transaction fee rather than as a cost to minimise, because a payment somebody cannot move is not a payment.</p><p class="copy">A pool-funded sponsor address supplies it. The sponsor is never a required signer on a refund or a fallback path, because anything that must sign an exit path is something that can block one.</p>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Versioning</h2><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><p class="copy">A change to any rule produces a new script and a new address. Both stay live. We do not migrate funds between versions, ever, for any reason, including our own convenience.</p></div>
+</div><p class="copy">The consequence we accept is that every version we ship is a version we operate permanently, and historical reference scripts stay funded indefinitely. That is the correct trade, because the alternative is a protocol with a function that moves your money without your signature. Nothing is worth having that function.</p><p class="copy">API versioning is a separate promise and we publish it in full: what counts as a breaking change, how long a version is supported, and how much notice you get. Escrow integrations are expensive to rewrite and you should know the terms before you build.</p>
+</section><hr class="rule"><div class="card card--pad-32"><div class="stack-16"><h2 class="section-title">What we deliberately did not build</h2><p class="copy">No custody. No per-customer contracts. No administrative override. No token, so there is nothing to buy, stake or farm, and the protocol’s economics do not depend on a price.</p><p class="copy">And no marketplace. We run a bounty platform on Hokan as a customer of our own API, and it holds no privileges over yours. We are not competing with you for your users.</p></div></div>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-top">
+        <div class="footer-cols">
+          <div class="stack-8">
+            <div class="footer-col__title">Product</div>
+            <a href="how-it-works.html" class="footer-link">How it works</a>
+            <a href="architecture.html" class="footer-link">Architecture</a>
+            <a href="use-cases.html" class="footer-link">Use cases</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Developers</div>
+            <a href="#docs" class="footer-link">Documentation</a>
+            <a href="#docs" class="footer-link">API reference</a>
+            <a href="#docs" class="footer-link">Sandbox</a>
+            <a href="#repo" class="footer-link">Contracts</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Trust</div>
+            <a href="trust.html" class="footer-link">Security</a>
+            <a href="trust.html#audit" class="footer-link">Audit</a>
+            <a href="trust.html#faq" class="footer-link">Questions</a>
+            <a href="#status" class="footer-link">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" class="cardano-lockup">
+      </div>
+      <p class="footer-note">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

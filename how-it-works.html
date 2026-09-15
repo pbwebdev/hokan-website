@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it works — Hokan</title>
+<meta name="description" content="Five states, six roles, and one rule that decides everything else: the person being paid never has to sign.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hokan">
+<meta property="og:title" content="How it works — Hokan">
+<meta property="og:description" content="Five states, six roles, and one rule that decides everything else: the person being paid never has to sign.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<!-- Built by tools/build.mjs from how-it-works.dc.html. Edit the design source, not this file. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+    <a class="brand" href="index.html" aria-label="Hokan home">
+      <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
+        <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
+        <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
+      </svg>
+      <span class="brand__word">hokan</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Primary">
+      <a href="how-it-works.html" aria-current="page">How it works</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="trust.html">Trust</a>
+      <a href="#docs">Docs</a>
+    </nav>
+  </header>
+
+  <main id="main">
+<div class="page">
+<div class="page-head">
+  <h1 class="page-title">How it works</h1>
+  <p class="lead">Five states, six roles, and one rule that decides everything else: the person being paid never has to sign.</p>
+</div><section class="stack-16">
+<h2 class="section-title">The lifecycle</h2><div class="flow"><b class="chip">Created</b><span class="flow__arrow"></span><b class="chip">Funded</b><span class="flow__arrow"></span><b class="chip">Approved</b><span class="flow__arrow"></span><b class="chip chip--strong">Released</b></div><p class="copy">An escrow is created with its parties, its amount, its milestones and its release rules. Nothing is locked yet, and nothing is binding.</p><p class="copy">The depositor funds it. At that moment the terms become immutable, including the complete fee schedule, so what they signed is what will happen.</p><p class="copy">The service provider marks a milestone delivered. The approver confirms the condition is met, and that approval is recorded on chain and cannot be withdrawn.</p><p class="copy">Release moves the funds to the receiver, with every fee routed in the same transaction. There is no separate settlement run and no reconciliation window.</p><h3 class="h3 h3--spaced">When it does not go that way</h3><div class="flow"><b class="chip">Funded</b><span class="flow__or">or</span><b class="chip">Approved</b><span class="flow__arrow"></span><b class="chip">Disputed</b><span class="flow__arrow"></span><b class="chip chip--strong">Resolved</b><span class="flow__or">or</span><b class="chip chip--strong">Fallback</b></div><p class="copy">A deadline that passes without approval refunds the depositor. Either party can raise a dispute before release. Both sides can also agree to unwind, in which case the funds go back and no fee is charged.</p>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Roles</h2><p class="copy">Our role names follow Trustless Work, which is becoming the common vocabulary for escrow APIs. If you have integrated with them, you can read our documentation without relearning anything. A single address can hold several roles, and your platform decides the mapping when the escrow is created.</p><div class="table-scroll"><table class="spec">
+<thead><tr><th scope="col">Role</th><th scope="col">What it can do</th></tr></thead>
+<tbody><tr><td>Depositor</td><td>Funds the escrow and receives refunds. Cannot release.</td></tr>
+<tr><td>Approver</td><td>Approves a milestone and can raise a dispute. Cannot release.</td></tr>
+<tr><td>Service provider</td><td>Marks milestone progress and attaches evidence. Can raise a dispute.</td></tr>
+<tr><td>Release signer</td><td>Executes release once approval conditions are met. Cannot approve.</td></tr>
+<tr><td>Receiver</td><td>Receives the funds. Signs nothing.</td></tr>
+<tr><td>Dispute resolver</td><td>Splits a disputed amount between the two sides. Optional.</td></tr></tbody></table></div><h3 class="h3 h3--spaced">Approval and release are separate</h3><p class="copy">They are also separate from status. An approval can legitimately arrive before a status update, so release depends on the approval state rather than on a status label. Conflating the three is where escrow designs usually go wrong, and it is why the approver and the release signer are different roles rather than one.</p><h3 class="h3 h3--spaced">Roles are addresses, not credentials</h3><p class="copy">We hold full addresses rather than payment credentials, so being paid through Hokan does not strip your staking rights. A role can also be held by a script, which is how a DAO or a multisig can act as an approver or a resolver rather than delegating to one person’s key.</p>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Disputes</h2><p class="copy">Escrow without a dispute process is just a timelock. But a resolver who can move funds anywhere is a custodian wearing a different hat, so ours is bounded by the contract instead of by terms of service.</p><div class="stack-32 stack-32--my"><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><h3 class="h3">It can only pay the two addresses already in the escrow</h3><p class="copy">Not a third address, not itself, not us, and not an address supplied when the transaction is built. A different destination fails validation outright.</p></div>
+</div><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><h3 class="h3">Ignoring a dispute costs it the fee</h3><p class="copy">The resolution window opens when the dispute is raised. Once it expires, a fallback path opens that anyone can execute, settling to the outcome the parties chose at creation. The dispute fee is charged on the resolution path only.</p></div>
+</div></div><p class="copy">The resolver defaults to you, not to us. You hold the customer relationship and the context that makes a fair decision possible. We supply the machinery that stops it being abused.</p><p class="copy">We call this expert determination rather than arbitration. Arbitration is a term with statutory duties attached that a platform decision cannot meet, and using it loosely creates an expectation nobody can honour.</p>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Integrating</h2><p class="copy">Every write operation follows the same shape. You describe what you want, we validate it and build the complete transaction, and you get back unsigned CBOR. Your wallet signs it and it goes to chain. You can inspect every byte before signing, which is what makes the fee disclosure real rather than a page in a contract.</p><p class="copy">State changes arrive as signed webhooks, delivered at least once with idempotency keys so processing the same event twice is safe.</p><p class="copy">Our SDK handles the parts that are genuinely annoying: merging a wallet witness set into a stored transaction body, partial signing when several parties are involved, sourcing collateral, and turning an expired intent into an error you can act on.</p><p class="copy"><a href="architecture.html">See the architecture</a> or <a href="#docs">read the documentation</a>.</p>
+</section>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-top">
+        <div class="footer-cols">
+          <div class="stack-8">
+            <div class="footer-col__title">Product</div>
+            <a href="how-it-works.html" class="footer-link">How it works</a>
+            <a href="architecture.html" class="footer-link">Architecture</a>
+            <a href="use-cases.html" class="footer-link">Use cases</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Developers</div>
+            <a href="#docs" class="footer-link">Documentation</a>
+            <a href="#docs" class="footer-link">API reference</a>
+            <a href="#docs" class="footer-link">Sandbox</a>
+            <a href="#repo" class="footer-link">Contracts</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Trust</div>
+            <a href="trust.html" class="footer-link">Security</a>
+            <a href="trust.html#audit" class="footer-link">Audit</a>
+            <a href="trust.html#faq" class="footer-link">Questions</a>
+            <a href="#status" class="footer-link">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" class="cardano-lockup">
+      </div>
+      <p class="footer-note">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

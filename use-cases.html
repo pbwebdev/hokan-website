@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Use cases — Hokan</title>
+<meta name="description" content="Bounties, freelance milestones, marketplaces, security deposits, grants and agent commerce — the same contract underneath all of them.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hokan">
+<meta property="og:title" content="Use cases — Hokan">
+<meta property="og:description" content="Bounties, freelance milestones, marketplaces, security deposits, grants and agent commerce — the same contract underneath all of them.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<!-- Built by tools/build.mjs from use-cases.dc.html. Edit the design source, not this file. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+    <a class="brand" href="index.html" aria-label="Hokan home">
+      <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
+        <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
+        <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
+      </svg>
+      <span class="brand__word">hokan</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Primary">
+      <a href="how-it-works.html">How it works</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="use-cases.html" aria-current="page">Use cases</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="trust.html">Trust</a>
+      <a href="#docs">Docs</a>
+    </nav>
+  </header>
+
+  <main id="main">
+<div class="page">
+<div class="page-head">
+  <h1 class="page-title">What people build on it</h1>
+  <p class="lead">The same contract underneath all of these. What changes is who holds which role and what the release condition is.</p>
+</div><div class="usecase-list"><div class="usecase">
+  <h3 class="usecase__title">Bounties and open source</h3>
+  <div class="usecase__body"><p class="copy">A project funds a bounty before anyone starts, so contributors can see the money is real rather than promised. Payment releases on merge or on maintainer approval.</p><p class="copy">No trust is required between a maintainer in Berlin and a contributor in Manila, and the contributor does not need to already hold ada to get paid.</p><p class="copy">This is the one we run ourselves, as a customer of the same public API you would use.</p></div>
+</div>
+<div class="usecase">
+  <h3 class="usecase__title">Freelance and agency milestones</h3>
+  <div class="usecase__body"><p class="copy">A client locks the full project value and releases it milestone by milestone. The freelancer can verify the money exists before starting. The client knows none of it moves until work lands.</p><p class="copy">Worth comparing against the ten to twenty three per cent that centralised freelance platforms take, and against how those platforms decide disputes.</p></div>
+</div>
+<div class="usecase">
+  <h3 class="usecase__title">Marketplace transactions</h3>
+  <div class="usecase__body"><p class="copy">Goods, digital assets or services. Funds hold until delivery is confirmed or a challenge window closes, and your commission routes in the same transaction as the release.</p><p class="copy">You keep the customer relationship, the branding and the dispute decision. We are not building a marketplace to compete with yours.</p></div>
+</div>
+<div class="usecase">
+  <h3 class="usecase__title">Security deposits and bonds</h3>
+  <div class="usecase__body"><p class="copy">Rentals, equipment hire, event bookings, contractor bonds. The deposit returns automatically unless a valid claim is raised before the deadline.</p><p class="copy">Refund by default removes the most common source of deposit disputes, which is not disagreement about damage but the holder simply not giving the money back.</p></div>
+</div>
+<div class="usecase">
+  <h3 class="usecase__title">Grants and milestone funding</h3>
+  <div class="usecase__body"><p class="copy">Funds locked per milestone rather than paid up front, with reviewers approving on chain. The funding body and the public can both audit what was released and when, without trusting a report.</p><p class="copy">Directly applicable to treasury and grant programmes, including Catalyst.</p></div>
+</div>
+<div class="usecase">
+  <h3 class="usecase__title">Agent commerce</h3>
+  <div class="usecase__body"><p class="copy">An agent commissions work from another agent or from a person. Escrow holds the value and releases against a condition, which is what agent payments need and what a one shot payment cannot do.</p><p class="copy">Neither party needs a legal relationship or a shared jurisdiction. Our agent tooling proposes transactions and never signs them.</p></div>
+</div>
+<div class="usecase">
+  <h3 class="usecase__title">Peer to peer and OTC</h3>
+  <div class="usecase__body"><p class="copy">Two people who found each other on Discord and have no reason to trust one another. Cheaper and faster than an incorporated escrow agent, with terms both sides can read before committing.</p></div>
+</div></div><div class="mt-64"><section class="stack-16">
+<h2 class="section-title">Not sure which shape fits</h2><p class="copy">The question that usually settles it is who approves and what they are approving. If you can answer that, the rest of the configuration follows. The quote endpoint will price it for you before you commit to anything.</p><p class="copy"><a href="#docs">Read the integration guides</a></p>
+</section></div>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-top">
+        <div class="footer-cols">
+          <div class="stack-8">
+            <div class="footer-col__title">Product</div>
+            <a href="how-it-works.html" class="footer-link">How it works</a>
+            <a href="architecture.html" class="footer-link">Architecture</a>
+            <a href="use-cases.html" class="footer-link">Use cases</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Developers</div>
+            <a href="#docs" class="footer-link">Documentation</a>
+            <a href="#docs" class="footer-link">API reference</a>
+            <a href="#docs" class="footer-link">Sandbox</a>
+            <a href="#repo" class="footer-link">Contracts</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Trust</div>
+            <a href="trust.html" class="footer-link">Security</a>
+            <a href="trust.html#audit" class="footer-link">Audit</a>
+            <a href="trust.html#faq" class="footer-link">Questions</a>
+            <a href="#status" class="footer-link">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" class="cardano-lockup">
+      </div>
+      <p class="footer-note">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

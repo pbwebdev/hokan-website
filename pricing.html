@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing — Hokan</title>
+<meta name="description" content="One fee on released funds. Yours on top, capped by the contract. Nothing charged on an escrow that is cancelled or expires.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hokan">
+<meta property="og:title" content="Pricing — Hokan">
+<meta property="og:description" content="One fee on released funds. Yours on top, capped by the contract. Nothing charged on an escrow that is cancelled or expires.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<!-- Built by tools/build.mjs from pricing.dc.html. Edit the design source, not this file. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+    <a class="brand" href="index.html" aria-label="Hokan home">
+      <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
+        <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
+        <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
+      </svg>
+      <span class="brand__word">hokan</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Primary">
+      <a href="how-it-works.html">How it works</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="pricing.html" aria-current="page">Pricing</a>
+      <a href="trust.html">Trust</a>
+      <a href="#docs">Docs</a>
+    </nav>
+  </header>
+
+  <main id="main">
+<div class="page">
+<div class="page-head">
+  <h1 class="page-title">Pricing</h1>
+  <p class="lead">One fee on released funds. Yours on top, capped by the contract. Nothing charged on an escrow that is cancelled or expires.</p>
+</div><section class="stack-16">
+<h2 class="section-title">The protocol fee</h2><p class="stat">0.5 <span class="stat__unit">%</span></p><p class="copy">Charged on released funds, collected by the contract at release, and capped at <span class="mono">1 000 USD</span> per escrow, so a large transaction never pays more than that. No subscription, no minimum, no token to hold, and nothing to pay on an escrow that never settles.</p>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Your fees</h2><p class="copy">Four optional fees you configure per escrow, routed to an address you nominate and settled in the same transaction as the release. Only the protocol fee is mandatory. Set the rest to zero if you would rather not charge them.</p><div class="table-scroll"><table class="spec">
+<thead><tr><th scope="col">Fee</th><th scope="col">Set by</th><th scope="col">Charged</th></tr></thead>
+<tbody><tr><td>Protocol</td><td>Hokan</td><td>On release</td></tr>
+<tr><td>Funding</td><td>You</td><td>When the escrow is funded</td></tr>
+<tr><td>Release</td><td>You</td><td>On release</td></tr>
+<tr><td>Dispute</td><td>You</td><td>On resolution only, never on the fallback</td></tr>
+<tr><td>Network</td><td>Cardano</td><td>Per transaction</td></tr></tbody></table></div><div class="stack-32 stack-32--mt"><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><h3 class="h3">The total is capped by the contract</h3><p class="copy">Your combined fees cannot exceed the ceiling, and the validator rejects the transaction if they do. A platform cannot quietly move past it, and that includes us.</p></div>
+</div><div class="claim">
+  <i class="seal seal--filled"></i>
+  <div class="stack-8"><h3 class="h3">The schedule freezes when the escrow is funded</h3><p class="copy">Every fee is set at creation and locked the moment money arrives, so the depositor sees the complete breakdown in the transaction they sign. A later pricing change reaches new escrows only.</p></div>
+</div></div>
+</section><hr class="rule"><section class="stack-16">
+<h2 class="section-title">Paying for API access</h2><p class="copy">Two paths, and they are complements rather than tiers of the same thing.</p><h3 class="h3 h3--spaced">Plans</h3><p class="copy">Conventional recurring billing in fiat, invoiced, for teams and companies who need something a finance department can process. Includes a sandbox and testnet access from signup.</p><h3 class="h3 h3--spaced">Per call</h3><p class="copy">For agents and for anyone who does not want an account, using the x402 standard so there is no signup form in the way. An agent cannot complete a signup form, which is the whole reason this path exists.</p><p class="copy">Neither affects the protocol fee. The contract collects that at release regardless of how you paid for the API request, which is also why an integrator building their own transactions pays exactly what an integrator using our SDK pays.</p>
+</section><hr class="rule"><div class="card card--pad-32"><div class="stack-16"><h2 class="section-title">See the number before you commit</h2><p class="copy">The quote endpoint returns a full breakdown and signs nothing. Call it, show your user exactly what they will pay, and nothing is committed until somebody signs a transaction.</p><p class="copy"><a href="#docs">Read the quote endpoint</a></p></div></div>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-top">
+        <div class="footer-cols">
+          <div class="stack-8">
+            <div class="footer-col__title">Product</div>
+            <a href="how-it-works.html" class="footer-link">How it works</a>
+            <a href="architecture.html" class="footer-link">Architecture</a>
+            <a href="use-cases.html" class="footer-link">Use cases</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Developers</div>
+            <a href="#docs" class="footer-link">Documentation</a>
+            <a href="#docs" class="footer-link">API reference</a>
+            <a href="#docs" class="footer-link">Sandbox</a>
+            <a href="#repo" class="footer-link">Contracts</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Trust</div>
+            <a href="trust.html" class="footer-link">Security</a>
+            <a href="trust.html#audit" class="footer-link">Audit</a>
+            <a href="trust.html#faq" class="footer-link">Questions</a>
+            <a href="#status" class="footer-link">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" class="cardano-lockup">
+      </div>
+      <p class="footer-note">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

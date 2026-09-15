@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hokan — Escrow as infrastructure for Cardano</title>
+<meta name="description" content="Non-custodial escrow on Cardano. Funds lock in a contract, release on conditions both sides agreed, and settle on chain. Integrate it with an API call.">
+<meta name="color-scheme" content="light dark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hokan">
+<meta property="og:title" content="Hokan — Escrow as infrastructure for Cardano">
+<meta property="og:description" content="Non-custodial escrow on Cardano. Funds lock in a contract, release on conditions both sides agreed, and settle on chain. Integrate it with an API call.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<!-- Built by tools/build.mjs from index.dc.html. Edit the design source, not this file. -->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="topbar">
+    <a class="brand" href="index.html" aria-label="Hokan home">
+      <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
+        <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
+        <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
+      </svg>
+      <span class="brand__word">hokan</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
+    </button>
+    <nav id="primary-nav" class="nav" aria-label="Primary">
+      <a href="how-it-works.html">How it works</a>
+      <a href="architecture.html">Architecture</a>
+      <a href="use-cases.html">Use cases</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="trust.html">Trust</a>
+      <a href="#docs">Docs</a>
+    </nav>
+  </header>
+
+  <main id="main">
+<div data-theme="dark" class="band band--hero">
+    <div class="band__inner band__inner--hero">
+      <img src="assets/mark-seal-dark.svg" alt="" width="40" height="40" class="hero-mark">
+      <div class="stack-24">
+        <div class="eyebrow">Escrow · Cardano · Non-custodial</div>
+        <h1 class="display-xl">Escrow as infrastructure for Cardano.</h1>
+        <p class="lead lead--hero">Funds lock in a contract, release on conditions both sides agreed, and settle on chain. Integrate it with an API call. You never hold the money, and neither do we.</p>
+      </div>
+      <div class="actions">
+        <a class="btn btn--primary" href="#docs">Read the docs</a>
+        <a class="btn btn--secondary" href="how-it-works.html">How it works</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="page page--roomy">
+
+    <section class="stack-16">
+      <h2 class="section-title">Escrow is the oldest trust mechanism in commerce, and it still runs on trusting a company.</h2>
+      <p class="copy">A neutral party holds the money until both sides do what they said they would. It underpins property settlement, freight, domain sales and every freelance marketplace on the internet.</p>
+      <p class="copy">The problem has always been the neutral party. Conventional escrow means an incorporated company with your money in its bank account, charging for the privilege, deciding disputes behind closed doors, and able to freeze, fail or disappear.</p>
+      <p class="copy">Hokan replaces the company with a contract. Funds sit at a validator address with the release conditions written into the terms. No Hokan wallet ever holds them. If we stopped existing tomorrow, every open escrow would still resolve.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section class="stack-16">
+      <h2 class="section-title">What the contract enforces</h2>
+      <p class="copy">Most escrow products describe their guarantees in terms of service. Ours are validator rules, which means they hold whether or not we are cooperative, solvent or still here. Where you see a filled seal on this site, the contract enforces it.</p>
+
+      <div class="legend">
+        <span class="legend__item"><i class="seal seal--filled seal--sm"></i>Enforced by the validator</span>
+        <span class="legend__item"><i class="seal seal--outline seal--sm"></i>Operational commitment</span>
+      </div>
+
+      <div class="stack-32">
+        <div class="claim">
+          <i class="seal seal--filled"></i>
+          <div class="stack-8">
+            <h3 class="h3">We cannot take your funds</h3>
+            <p class="copy">Every write returns an unsigned transaction and your own wallet signs it. There is no administrative function that sweeps the contract, because we never designed one and could not add one to a deployed script.</p>
+          </div>
+        </div>
+        <div class="claim">
+          <i class="seal seal--filled"></i>
+          <div class="stack-8">
+            <h3 class="h3">Every escrow has an exit nobody can block</h3>
+            <p class="copy">From every state there is a path to settlement that does not need the resolver, us, or the other party's cooperation. Timeouts release rather than trap. The worst outcome in this system is a delay, never a loss.</p>
+          </div>
+        </div>
+        <div class="claim">
+          <i class="seal seal--filled"></i>
+          <div class="stack-8">
+            <h3 class="h3">Fees freeze when the escrow is funded</h3>
+            <p class="copy">The whole schedule is set at creation and locked once funded, so the depositor sees the full breakdown in the transaction they sign. We can change our pricing tomorrow and it will not reach a single escrow already holding money.</p>
+          </div>
+        </div>
+        <div class="claim">
+          <i class="seal seal--filled"></i>
+          <div class="stack-8">
+            <h3 class="h3">A dispute resolver can only pay the two parties</h3>
+            <p class="copy">It may pay the depositor or the receiver at the addresses already in the escrow, and nowhere else. Not itself, not us, not an address supplied later. What it decides is the split, which is the only discretion anyone wanted it to have.</p>
+          </div>
+        </div>
+        <div class="claim">
+          <i class="seal seal--outline"></i>
+          <div class="stack-8">
+            <h3 class="h3">Your data stays yours</h3>
+            <p class="copy">An operational commitment rather than a contract rule, and we mark it as one. The chain holds the escrow. We hold the cache, the webhooks and your account.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="rule">
+
+    <section class="stack-16">
+      <h2 class="section-title">One contract, and no private door for us</h2>
+      <p class="copy">There is a single script address for every tenant and every escrow. We do not deploy a contract per customer, because that turns one reviewable contract into many unverifiable ones and makes an audit worth much less than it appears.</p>
+      <p class="copy">We also run a bounty platform on top of Hokan. It uses the same public API you do, with no internal endpoint, no bypass and no capability you cannot call. If we need something, you get it too. A private path would be a design bug, not a perk.</p>
+      <p class="copy"><a href="architecture.html">Read the architecture</a></p>
+    </section>
+
+    <hr class="rule">
+
+    <section class="stack-16">
+      <h2 class="section-title">Built for people who have never touched Cardano</h2>
+      <p class="copy">Release does not require a signature from the person being paid. That sounds like a technical detail and it decides whether a protocol is a custodian, because any design that needs the recipient to sign forces somebody to hold recipient wallets.</p>
+      <p class="copy">It also means you can pay a contributor with an empty wallet. A stablecoin payout carries the small amount of ada needed to move it, so their first transaction is not blocked on acquiring ada they do not have.</p>
+    </section>
+
+    <hr class="rule">
+
+    <section class="stack-16">
+      <h2 class="section-title">Agents propose. People sign.</h2>
+      <p class="copy">Escrow is the payment rail agent commerce is missing. A one shot payment is the wrong primitive for work that takes a week and might be rejected. Conditional settlement is exactly what escrow is.</p>
+      <p class="copy">Our agent tooling holds no key and has no signing capability. An agent can assemble an escrow, price it and hand back an unsigned transaction, and that is where it stops. This is not caution for its own sake: in escrow, the untrusted text is the product, and an agent that reads submissions and can also move value can be instructed by whoever wrote the submission.</p>
+      <p class="copy">The worst outcome of a fully compromised agent here is a person being shown a transaction they should not sign. That is a phishing problem with a human in the loop, not a theft.</p>
+    </section>
+
+  </div>
+
+  <div data-theme="dark" class="band">
+    <div class="band__inner">
+      <h2 class="display-lg">Start with the quote endpoint.</h2>
+      <p class="lead lead--sm">It returns a complete fee breakdown and signs nothing, so you can see exactly what an escrow costs before anything is committed.</p>
+      <div class="actions">
+        <a class="btn btn--primary" href="#docs">Read the docs</a>
+        <a class="btn btn--secondary" href="pricing.html">See pricing</a>
+      </div>
+    </div>
+  </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-top">
+        <div class="footer-cols">
+          <div class="stack-8">
+            <div class="footer-col__title">Product</div>
+            <a href="how-it-works.html" class="footer-link">How it works</a>
+            <a href="architecture.html" class="footer-link">Architecture</a>
+            <a href="use-cases.html" class="footer-link">Use cases</a>
+            <a href="pricing.html" class="footer-link">Pricing</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Developers</div>
+            <a href="#docs" class="footer-link">Documentation</a>
+            <a href="#docs" class="footer-link">API reference</a>
+            <a href="#docs" class="footer-link">Sandbox</a>
+            <a href="#repo" class="footer-link">Contracts</a>
+          </div>
+          <div class="stack-8">
+            <div class="footer-col__title">Trust</div>
+            <a href="trust.html" class="footer-link">Security</a>
+            <a href="trust.html#audit" class="footer-link">Audit</a>
+            <a href="trust.html#faq" class="footer-link">Questions</a>
+            <a href="#status" class="footer-link">Status</a>
+          </div>
+        </div>
+        <img src="assets/built-on-cardano.svg" alt="Built on Cardano" class="cardano-lockup">
+      </div>
+      <p class="footer-note">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
