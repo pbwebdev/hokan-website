@@ -1,0 +1,39 @@
+<figure class="diagram">
+  <div class="diagram__viewport" role="region" tabindex="0" aria-label="The write path, scrollable diagram">
+    <svg viewBox="0 0 760 214" role="img" aria-label="The write path. Your application describes the escrow to the Hokan API, which returns an unsigned transaction. Your wallet signs it, the signed transaction goes to Cardano, and the state change comes back to your application as a signed webhook.">
+    <defs>
+      <marker id="dg-arrow-tx" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <polygon class="dg-arrow" points="0,0 8,4 0,8"></polygon>
+      </marker>
+    </defs>
+
+    <rect class="dg-surface" x="0" y="40" width="150" height="64" rx="6"></rect>
+    <text class="dg-label" x="75" y="78" text-anchor="middle">Your app</text>
+
+    <rect class="dg-surface" x="205" y="40" width="150" height="64" rx="6"></rect>
+    <text class="dg-label" x="280" y="70" text-anchor="middle">Hokan API</text>
+    <text class="dg-note" x="280" y="88" text-anchor="middle">builds the tx</text>
+
+    <rect class="dg-surface" x="410" y="40" width="150" height="64" rx="6"></rect>
+    <text class="dg-label" x="485" y="70" text-anchor="middle">Your wallet</text>
+    <text class="dg-note" x="485" y="88" text-anchor="middle">the only signer</text>
+
+    <rect class="dg-surface--accent" x="610" y="40" width="150" height="64" rx="6"></rect>
+    <text class="dg-label" x="685" y="70" text-anchor="middle">Cardano</text>
+    <text class="dg-note--accent" x="685" y="88" text-anchor="middle">settled</text>
+
+    <line class="dg-line" x1="150" y1="72" x2="196" y2="72" marker-end="url(#dg-arrow-tx)"></line>
+    <text class="dg-note" x="173" y="32" text-anchor="middle">intent</text>
+
+    <line class="dg-line" x1="355" y1="72" x2="401" y2="72" marker-end="url(#dg-arrow-tx)"></line>
+    <text class="dg-note" x="378" y="32" text-anchor="middle">unsigned CBOR</text>
+
+    <line class="dg-line" x1="560" y1="72" x2="601" y2="72" marker-end="url(#dg-arrow-tx)"></line>
+    <text class="dg-note" x="580" y="32" text-anchor="middle">signed</text>
+
+    <path class="dg-line" d="M685 104 V158 H75 V113" marker-end="url(#dg-arrow-tx)"></path>
+    <text class="dg-note" x="380" y="176" text-anchor="middle">signed webhook · at least once · idempotency key</text>
+    </svg>
+  </div>
+  <figcaption>Every write is the same shape. Nothing settles that you did not inspect and sign, and every state change comes back to you as an event rather than something you poll for.</figcaption>
+</figure>

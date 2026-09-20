@@ -17,10 +17,10 @@
  * changes, the build tells you exactly which rule needs a class.
  */
 
-import { readFileSync, writeFileSync, readdirSync } from "node:fs";
+import { existsSync, readFileSync, writeFileSync, readdirSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
-import { NAV, PAGES, SHOW_NOTES, SITE_URL } from "./pages.mjs";
+import { FOOTER_COLUMNS, NAV, PAGES, PARENT, SHOW_NOTES, SITE_URL } from "./pages.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DS = join(ROOT, "_ds", readdirSync(join(ROOT, "_ds"))[0]);
@@ -176,26 +176,122 @@ function structuredData(page, html, canonical) {
 
 function topBar(active) {
   const links = NAV.map((l) => {
+    if (l.soon) {
+      return `        <span class="nav__soon">${l.label}<i class="pill">Soon</i></span>`;
+    }
     const current = l.label === active ? ' aria-current="page"' : "";
-    return `      <a href="${l.href}"${current}>${l.label}</a>`;
+    return `        <a href="${l.href}"${current}>${l.label}</a>`;
   }).join("\n");
 
   return `<header class="topbar">
-    <a class="brand" href="index.html" aria-label="Hokan home">
-      <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
-        <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
-        <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
-      </svg>
-      <span class="brand__word">hokan</span>
-    </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
-      <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
-    </button>
-    <nav id="primary-nav" class="nav" aria-label="Primary">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html" aria-label="Hokan home">
+        <svg class="brand__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <circle class="brand__disc" cx="12" cy="12" r="12"></circle>
+          <path class="brand__ink" d="M9 7H6.5V17H9M15 7H17.5V17H15" fill="none" stroke-width="1.75"></path>
+          <circle class="brand__dot" cx="12" cy="12" r="1.9"></circle>
+        </svg>
+        <span class="brand__word">hokan</span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" hidden>
+        <span class="nav-toggle__bars" aria-hidden="true"></span>Menu
+      </button>
+      <nav id="primary-nav" class="nav" aria-label="Primary">
 ${links}
-    </nav>
+      </nav>
+    </div>
   </header>`;
+}
+
+/* The Cardano brand mark (simple-icons, CC0 path data). Inline rather than an
+   <img> so it can take the brand blue in light and go monochrome in dark. */
+const CARDANO_MARK =
+  '<svg class="cardano-lockup__mark" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' +
+  '<path d="M6.5765 11.92c-.0488.8906.6316 1.653 1.5219 1.7056h.0934c.8928-.0006 1.6161-.725 1.6155-1.6178-.0006-.8928-.725-1.6161-1.6178-1.6155-.8578.0006-1.5658.6711-1.613 1.5277Z"></path>' +
+  '<path d="M.5515 11.504c-.288-.0161-.5345.2042-.5507.4922-.0161.288.2042.5345.4922.5507.2878.0161.5343-.204.5506-.4918.0167-.2876-.2029-.5343-.4905-.5511h-.0016Z"></path>' +
+  '<path d="M6.3818 4.6996c.2578.1319.5736.0297.7055-.2281.132-.2578.0298-.5736-.228-.7056-.2577-.1319-.5734-.0298-.7054.2279-.1325.2575-.0313.5736.2262.7061l.0017.0009Z"></path>' +
+  '<path d="M8.1042 8.0842c.3982-.2678.5039-.8077.2361-1.2059-.2678-.3982-.8077-.5039-1.2059-.2361-.3982.2678-.5039.8077-.2361 1.2059.2671.3979.806.5039 1.2043.2372l.0016-.0011Z"></path>' +
+  '<path d="M2.6262 8.8072c.3096.2025.7247.116.9272-.1936.2025-.3096.116-.7247-.1936-.9272-.3096-.2025-.7246-.1161-.9272.1934-.2029.3094-.1168.7247.1924.9276l.0012.0008Z"></path>' +
+  '<path d="M3.8482 11.3606c-.3403-.0213-.6335.2373-.6548.5776-.0213.3403.2373.6335.5776.6548.3401.0213.6332-.2369.6548-.577.0213-.3403-.2372-.6335-.5776-.6554Z"></path>' +
+  '<path d="M2.6787 15.2255c-.3244.1704-.4492.5716-.2788.896.1704.3244.5716.4492.896.2788.3244-.1704.4492-.5716.2788-.896-.1699-.3241-.5706-.4492-.8949-.2795l-.0011.0007Z"></path>' +
+  '<path d="M7.6759 9.6884c.2929.1917.6858.1099.8775-.183.1917-.2929.1099-.6858-.183-.8775-.2929-.1917-.6857-.11-.8775.1827-.192.2929-.1104.6859.1823.8779l.0007-.0001Z"></path>' +
+  '<path d="M12.0413 5.4553c.2895.0173.5382-.2033.5555-.4928.0173-.2895-.2033-.5382-.4928-.5555-.2892-.0173-.5377.2029-.5554.4921-.0176.2894.2028.5382.4922.5559l.0005.0003Z"></path>' +
+  '<path d="M12.0244 8.6215c.4344.0261.8076-.3048.8337-.7392.0261-.4344-.3048-.8076-.7392-.8337-.4344-.0261-.8076.3048-.8337.7392-.0259.434.3045.807.7383.8336l.0009.0001Z"></path>' +
+  '<path d="M6.1244 13.9857c.415-.0932.6756-.5051.5824-.9201-.0932-.415-.5051-.6756-.9201-.5824-.415.0932-.6756.5051-.5824.9201.0928.4145.5039.6751.9188.5828l.0013-.0004Z"></path>' +
+  '<path d="M9.0645 15.8933c-.3624.2436-.4589.7349-.2153 1.0973.2436.3624.7349.4589 1.0973.2153.3624-.2436.4589-.7349.2153-1.0973-.2432-.362-.7337-.4587-1.0961-.2159l-.0012.0006Z"></path>' +
+  '<path d="M12.0163 10.3062c-.9313-.0559-1.7316.6537-1.7875 1.585-.0559.9313.6537 1.7316 1.585 1.7875.9313.0559 1.7316-.6537 1.7875-1.585.0007-.0117.0013-.0233.0018-.035.0475-.9204-.6553-1.7062-1.5757-1.7615l-.0111.009Z"></path>' +
+  '<path d="M6.1244 10.0289c.415-.0932.6756-.5051.5824-.9201-.0932-.415-.5051-.6756-.9201-.5824-.415.0932-.6756.5051-.5824.9201.0928.4145.5039.6751.9188.5828l.0013-.0004Z"></path>' +
+  '<path d="M17.9188 8.0842c.3982.2678.9381.1621 1.2059-.2361.2678-.3982.1621-.9381-.2361-1.2059-.3982-.2678-.9381-.1621-1.2059.2361-.2672.3979-.1626.9374.2345 1.2054l.0016.0005Z"></path>' +
+  '<path d="M16.2723 9.6884c.2929-.192.3745-.585.1825-.8779-.192-.2929-.585-.3745-.8779-.1825-.2929.192-.3745.585-.1825.8779.1917.2925.5839.3743.8767.183l.0012-.0005Z"></path>' +
+  '<path d="M17.8756 11.92c.0488.8906-.6316 1.653-1.5219 1.7056h-.0934c-.8928-.0006-1.6161-.725-1.6155-1.6178.0006-.8928.725-1.6161 1.6178-1.6155.8578.0006 1.5658.6711 1.613 1.5277Z"></path>' +
+  '<path d="M11.9958 14.2971c-.9313.0559-1.6409.8562-1.585 1.7875.0559.9313.8562 1.6409 1.7875 1.585.9313-.0559 1.6409-.8562 1.585-1.7875-.0546-.9096-.8073-1.6182-1.7185-1.6179l-.069.0329Z"></path>' +
+  '<path d="M11.9587 19.0227c-.4344.0261-.7653.3993-.7392.8337.0261.4344.3993.7653.8337.7392.4344-.0261.7653-.3993.7392-.8337-.0257-.4336-.3979-.7645-.8316-.7396l-.0021.0004Z"></path>' +
+  '<path d="M11.9418 22.1889c-.2895.0173-.5101.266-.4928.5555.0173.2895.266.5101.5555.4928.2892-.0173.5097-.2657.4927-.5549-.0173-.2895-.2657-.5105-.5551-.4936l-.0003.0002Z"></path>' +
+  '<path d="M18.3277 13.9857c-.415-.0932-.6756-.5051-.5824-.9201.0932-.415.5051-.6756.9201-.5824.415.0932.6756.5051.5824.9201-.0928.4145-.5039.6751-.9188.5828l-.0013-.0004Z"></path>' +
+  '<path d="M18.3277 10.0289c-.415-.0932-.6756-.5051-.5824-.9201.0932-.415.5051-.6756.9201-.5824.415.0932.6756.5051.5824.9201-.0928.4145-.5039.6751-.9188.5828l-.0013-.0004Z"></path>' +
+  '<path d="M14.8894 15.8933c.3624.2436.4589.7349.2153 1.0973-.2436.3624-.7349.4589-1.0973.2153-.3624-.2436-.4589-.7349-.2153-1.0973.2432-.362.7337-.4587 1.0961-.2159l.0012.0006Z"></path>' +
+  '<path d="M14.8894 8.1067c.3624-.2436.4589-.7349.2153-1.0973-.2436-.3624-.7349-.4589-1.0973-.2153-.3624.2436-.4589.7349-.2153 1.0973.2432.362.7337.4587 1.0961.2159l.0012-.0006Z"></path>' +
+  '<path d="M9.0645 8.1067c-.3624-.2436-.4589-.7349-.2153-1.0973.2436-.3624.7349-.4589 1.0973-.2153.3624.2436.4589.7349.2153 1.0973-.2432.362-.7337.4587-1.0961.2159l-.0012-.0006Z"></path>' +
+  '<path d="M21.7738 8.8072c-.3096.2025-.7247.116-.9272-.1936-.2025-.3096-.116-.7247.1936-.9272.3096-.2025.7246-.1161.9272.1934.2029.3094.1168.7247-.1924.9276l-.0012.0008Z"></path>' +
+  '<path d="M20.5518 11.3606c.3403-.0213.6335.2373.6548.5776.0213.3403-.2373.6335-.5776.6548-.3401.0213-.6332-.2369-.6548-.577-.0213-.3403.2372-.6335.5776-.6554Z"></path>' +
+  '<path d="M23.8485 11.504c.288-.0161.5345.2042.5507.4922.0161.288-.2042.5345-.4922.5507-.2878.0161-.5343-.204-.5506-.4918-.0167-.2876.2029-.5343.4905-.5511h.0016Z"></path>' +
+  '<path d="M18.0182 4.6996c-.2578.1319-.5736.0297-.7055-.2281-.132-.2578-.0298-.5736.228-.7056.2577-.1319.5734-.0298.7054.2279.1325.2575.0313.5736-.2262.7061l-.0017.0009Z"></path>' +
+  '<path d="M21.7213 15.2255c.3244.1704.4492.5716.2788.896-.1704.3244-.5716.4492-.896.2788-.3244-.1704-.4492-.5716-.2788-.896.1699-.3241.5706-.4492.8949-.2795l.0011.0007Z"></path>' +
+  '<path d="M6.3818 19.3004c.2578-.1319.5736-.0297.7055.2281.132.2578.0298.5736-.228.7056-.2577.1319-.5734.0298-.7054-.2279-.1325-.2575-.0313-.5736.2262-.7061l.0017-.0009Z"></path>' +
+  '<path d="M18.0182 19.3004c-.2578-.1319-.5736-.0297-.7055.2281-.132.2578-.0298.5736.228.7056.2577.1319.5734.0298.7054-.2279.1325-.2575.0313-.5736-.2262-.7061l-.0017-.0009Z"></path>' +
+  "</svg>";
+
+const SOCIAL_ICONS = {
+  LinkedIn:
+    '<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path>',
+  X: '<path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"></path>',
+};
+
+function footerColumn(col) {
+  const items = col.links.map((l) =>
+    l.soon
+      ? `          <span class="footer-link footer-link--soon">${l.label}<i class="pill">Soon</i></span>`
+      : `          <a class="footer-link" href="${l.href}">${l.label}</a>`,
+  ).join("\n");
+
+  return `        <div class="footer-col">
+          <div class="footer-col__title">${col.title}</div>
+${items}
+        </div>`;
+}
+
+/* One footer for every page, so the parent-company line, the Soon markers and
+   the Cardano lockup are defined once rather than six times. */
+function siteFooter() {
+  const columns = FOOTER_COLUMNS.map(footerColumn).join("\n");
+  const social = PARENT.social.map((s) =>
+    `          <a class="social" href="${s.href}" rel="noopener" target="_blank" aria-label="${PARENT.name} on ${s.label}">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">${SOCIAL_ICONS[s.label]}</svg>
+          </a>`,
+  ).join("\n");
+
+  return `<footer class="site-footer">
+    <div class="site-footer__inner">
+      <div class="footer-top">
+        <div class="footer-cols">
+${columns}
+        </div>
+        <a class="cardano-lockup" href="https://cardano.org/" rel="noopener" target="_blank">
+          ${CARDANO_MARK}
+          <span>Built on Cardano</span>
+        </a>
+      </div>
+
+      <div class="footer-parent">
+        <p class="footer-parent__line">Hokan is built by <a href="${PARENT.url}" rel="noopener" target="_blank">${PARENT.name}</a>, which builds non-custodial payment infrastructure. Cardano is the first settlement network; more are on the roadmap.</p>
+        <div class="footer-parent__social">
+${social}
+        </div>
+      </div>
+
+      <p class="footer-note">Hokan is escrow infrastructure. We are not a marketplace, not a custodian, and there is no token.</p>
+    </div>
+  </footer>`;
 }
 
 function build(page) {
@@ -223,6 +319,11 @@ function build(page) {
     /<x-import[^>]*\.Card[^>]*padding="32"[^>]*>([\s\S]*?)<\/x-import>/g,
     (_m, body) => `<div class="card card--pad-32">${body}</div>`,
   );
+  // An action that has no destination yet is a label, never a dead button.
+  html = html.replace(
+    /<span data-btn="soon">([^<]*)<\/span>/g,
+    (_m, label) => `<span class="btn btn--soon">${label}<i class="pill">Soon</i></span>`,
+  );
 
   // 3. pre-publication notes
   html = SHOW_NOTES
@@ -246,6 +347,18 @@ function build(page) {
 
   // 7. canvas filenames -> deployed filenames
   html = html.replace(/\.dc\.html/g, ".html");
+
+  // 7b. one shared footer, replacing the copy baked into every artboard
+  const footerAt = html.indexOf("<footer");
+  if (footerAt === -1) throw new Error(`${page.src}: no footer to replace`);
+  html = html.slice(0, footerAt) + siteFooter();
+
+  // 7c. diagrams: <div data-diagram="name"></div> -> tools/diagrams/name.html
+  html = html.replace(/<div data-diagram="([a-z0-9-]+)"><\/div>/g, (_m, name) => {
+    const file = join(ROOT, "tools", "diagrams", `${name}.html`);
+    if (!existsSync(file)) throw new Error(`${page.src}: no diagram named ${name}`);
+    return readFileSync(file, "utf8").trim();
+  });
 
   // 8. one <main> landmark covering every band, not just the prose column
   html = html

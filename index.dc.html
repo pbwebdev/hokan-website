@@ -30,8 +30,8 @@
         <p style="font-size:20px;line-height:1.45;color:var(--text-2);max-width:600px;margin:0">Funds lock in a contract, release on conditions both sides agreed, and settle on chain. Integrate it with an API call. You never hold the money, and neither do we.</p>
       </div>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="#docs" style="text-decoration:none"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Button" variant="primary" hint-size="auto,40px">Read the docs</x-import></a>
-        <a href="how-it-works.dc.html" style="text-decoration:none"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Button" variant="secondary" hint-size="auto,40px">How it works</x-import></a>
+        <a href="how-it-works.dc.html" style="text-decoration:none"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Button" variant="primary" hint-size="auto,40px">How it works</x-import></a>
+        <span data-btn="soon">Read the docs</span>
       </div>
     </div>
   </div>
@@ -43,6 +43,7 @@
       <p style="margin:0;max-width:640px">A neutral party holds the money until both sides do what they said they would. It underpins property settlement, freight, domain sales and every freelance marketplace on the internet.</p>
       <p style="margin:0;max-width:640px">The problem has always been the neutral party. Conventional escrow means an incorporated company with your money in its bank account, charging for the privilege, deciding disputes behind closed doors, and able to freeze, fail or disappear.</p>
       <p style="margin:0;max-width:640px">Hokan replaces the company with a contract. Funds sit at a validator address with the release conditions written into the terms. No Hokan wallet ever holds them. If we stopped existing tomorrow, every open escrow would still resolve.</p>
+      <div data-diagram="custody"></div>
     </section>
 
     <hr style="border:0;border-top:1px solid var(--border);margin:64px 0">
@@ -107,6 +108,15 @@
     <hr style="border:0;border-top:1px solid var(--border);margin:64px 0">
 
     <section style="display:flex;flex-direction:column;gap:16px">
+      <h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Cardano first, not Cardano only</h2>
+      <p style="margin:0;max-width:640px">Cardano is our first settlement network, and everything on this site describes what runs there today. It is a deliberate first choice rather than the only one: deterministic fees, a scripting model where a validator can be reasoned about before it is deployed, and settlement that is final when the transaction is.</p>
+      <p style="margin:0;max-width:640px">Expansion to further networks is on the longer-term roadmap. The parts worth porting are the escrow model and the API, not the validator, because a guarantee is only worth what the chain enforcing it does. When another network arrives we will say plainly which guarantees carry across and which do not, rather than describing the weakest deployment in the language of the strongest.</p>
+      <p style="margin:0;max-width:640px">What will not change is the shape of the integration. You describe an escrow and sign a transaction, and the network underneath is a field on the request.</p>
+    </section>
+
+    <hr style="border:0;border-top:1px solid var(--border);margin:64px 0">
+
+    <section style="display:flex;flex-direction:column;gap:16px">
       <h2 style="font-family:var(--font-display);font-weight:400;font-size:32px;line-height:1.15;letter-spacing:-0.01em;margin:0;max-width:30ch">Built for people who have never touched Cardano</h2>
       <p style="margin:0;max-width:640px">Release does not require a signature from the person being paid. That sounds like a technical detail and it decides whether a protocol is a custodian, because any design that needs the recipient to sign forces somebody to hold recipient wallets.</p>
       <p style="margin:0;max-width:640px">It also means you can pay a contributor with an empty wallet. A stablecoin payout carries the small amount of ada needed to move it, so their first transaction is not blocked on acquiring ada they do not have.</p>
@@ -128,8 +138,8 @@
       <h2 style="font-family:var(--font-display);font-weight:400;font-size:40px;line-height:1.1;letter-spacing:-0.01em;margin:0;max-width:24ch">Start with the quote endpoint.</h2>
       <p style="font-size:18px;line-height:1.5;color:var(--text-2);max-width:600px;margin:0">It returns a complete fee breakdown and signs nothing, so you can see exactly what an escrow costs before anything is committed.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap">
-        <a href="#docs" style="text-decoration:none"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Button" variant="primary" hint-size="auto,40px">Read the docs</x-import></a>
-        <a href="pricing.dc.html" style="text-decoration:none"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Button" variant="secondary" hint-size="auto,40px">See pricing</x-import></a>
+        <a href="pricing.dc.html" style="text-decoration:none"><x-import component-from-global-scope="HokanDesignSystem_3594b4.Button" variant="primary" hint-size="auto,40px">See pricing</x-import></a>
+        <span data-btn="soon">Read the docs</span>
       </div>
     </div>
   </div>

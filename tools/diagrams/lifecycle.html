@@ -1,0 +1,61 @@
+<figure class="diagram">
+  <div class="diagram__viewport" role="region" tabindex="0" aria-label="Escrow lifecycle, scrollable diagram">
+    <svg viewBox="0 0 660 346" role="img" aria-label="Escrow state machine. Created becomes Funded when the depositor funds it, Approved when the approver confirms, and Released when the release signer executes. From Funded a missed deadline refunds the depositor. From Funded or Approved either party can raise a dispute, and a dispute ends either in the resolver's split or, once the window expires, in the fallback both sides chose at creation.">
+    <defs>
+      <marker id="dg-arrow-life" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <polygon class="dg-arrow" points="0,0 8,4 0,8"></polygon>
+      </marker>
+    </defs>
+
+    <!-- happy path -->
+    <rect class="dg-surface" x="0" y="30" width="130" height="52" rx="6"></rect>
+    <text class="dg-label" x="65" y="61" text-anchor="middle">Created</text>
+
+    <rect class="dg-surface" x="170" y="30" width="130" height="52" rx="6"></rect>
+    <text class="dg-label" x="235" y="61" text-anchor="middle">Funded</text>
+
+    <rect class="dg-surface" x="340" y="30" width="130" height="52" rx="6"></rect>
+    <text class="dg-label" x="405" y="61" text-anchor="middle">Approved</text>
+
+    <rect class="dg-surface--strong" x="510" y="30" width="130" height="52" rx="6"></rect>
+    <text class="dg-label dg-label--strong" x="575" y="61" text-anchor="middle">Released</text>
+
+    <line class="dg-line" x1="130" y1="56" x2="161" y2="56" marker-end="url(#dg-arrow-life)"></line>
+    <text class="dg-note" x="145" y="22" text-anchor="middle">fund</text>
+    <line class="dg-line" x1="300" y1="56" x2="331" y2="56" marker-end="url(#dg-arrow-life)"></line>
+    <text class="dg-note" x="315" y="22" text-anchor="middle">approve</text>
+    <line class="dg-line" x1="470" y1="56" x2="501" y2="56" marker-end="url(#dg-arrow-life)"></line>
+    <text class="dg-note" x="485" y="22" text-anchor="middle">release</text>
+
+    <!-- exceptions -->
+    <rect class="dg-surface--strong" x="0" y="140" width="130" height="52" rx="6"></rect>
+    <text class="dg-label dg-label--strong" x="65" y="171" text-anchor="middle">Refunded</text>
+
+    <rect class="dg-surface" x="340" y="140" width="130" height="52" rx="6"></rect>
+    <text class="dg-label" x="405" y="171" text-anchor="middle">Disputed</text>
+
+    <path class="dg-line" d="M200 82 V116 H65 V131" marker-end="url(#dg-arrow-life)"></path>
+    <text class="dg-note" x="192" y="112" text-anchor="end">deadline passes</text>
+
+    <path class="dg-line" d="M270 82 V116 H380 V131" marker-end="url(#dg-arrow-life)"></path>
+    <line class="dg-line" x1="430" y1="82" x2="430" y2="131" marker-end="url(#dg-arrow-life)"></line>
+    <text class="dg-note" x="440" y="112">either party disputes</text>
+
+    <!-- dispute outcomes -->
+    <rect class="dg-surface--strong" x="275" y="250" width="130" height="52" rx="6"></rect>
+    <text class="dg-label dg-label--strong" x="340" y="281" text-anchor="middle">Resolved</text>
+
+    <rect class="dg-surface--strong" x="445" y="250" width="130" height="52" rx="6"></rect>
+    <text class="dg-label dg-label--strong" x="510" y="281" text-anchor="middle">Fallback</text>
+
+    <path class="dg-line" d="M380 192 V226 H340 V241" marker-end="url(#dg-arrow-life)"></path>
+    <text class="dg-note" x="332" y="222" text-anchor="end">resolver splits</text>
+    <path class="dg-line" d="M430 192 V226 H510 V241" marker-end="url(#dg-arrow-life)"></path>
+    <text class="dg-note" x="440" y="222">window expires</text>
+
+    <rect class="dg-surface--strong" x="0" y="326" width="12" height="12" rx="2"></rect>
+    <text class="dg-note" x="20" y="336">settled — the funds have moved and the escrow is closed</text>
+    </svg>
+  </div>
+  <figcaption>Every path ends in a settled state, and every settled state is reachable without the resolver, without us, and without the other party's cooperation.</figcaption>
+</figure>

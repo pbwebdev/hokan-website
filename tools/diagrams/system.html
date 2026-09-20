@@ -1,0 +1,60 @@
+<figure class="diagram">
+  <div class="diagram__viewport" role="region" tabindex="0" aria-label="System map, scrollable diagram">
+    <svg viewBox="0 0 760 402" role="img" aria-label="System map. Off chain: a transaction builder that never signs, a webhook and cache layer that is a projection rather than truth, and a rollback-aware chain follower. Your wallet sits between the two zones and is the only signer. On chain: the escrow UTxO holding the funds, terms and identity token, and a configuration UTxO that the escrow reads as a reference input and never spends. The follower watches the validator address; the cache is derived from the chain, never the other way round.">
+    <defs>
+      <marker id="dg-arrow-sys" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <polygon class="dg-arrow" points="0,0 8,4 0,8"></polygon>
+      </marker>
+      <marker id="dg-arrow-sys-quiet" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <polygon class="dg-arrow--quiet" points="0,0 8,4 0,8"></polygon>
+      </marker>
+    </defs>
+
+    <rect class="dg-zone" x="0" y="0" width="760" height="150" rx="6"></rect>
+    <text class="dg-zone-label" x="14" y="22">Off chain · ours</text>
+
+    <rect class="dg-surface" x="24" y="52" width="190" height="64" rx="6"></rect>
+    <text class="dg-label" x="119" y="82" text-anchor="middle">Transaction builder</text>
+    <text class="dg-note" x="119" y="100" text-anchor="middle">never signs</text>
+
+    <rect class="dg-surface" x="270" y="52" width="190" height="64" rx="6"></rect>
+    <text class="dg-label" x="365" y="82" text-anchor="middle">Webhooks + cache</text>
+    <text class="dg-note" x="365" y="100" text-anchor="middle">a projection</text>
+
+    <rect class="dg-surface" x="546" y="52" width="190" height="64" rx="6"></rect>
+    <text class="dg-label" x="641" y="82" text-anchor="middle">Chain follower</text>
+    <text class="dg-note" x="641" y="100" text-anchor="middle">rollback aware</text>
+
+    <line class="dg-line" x1="546" y1="84" x2="469" y2="84" marker-end="url(#dg-arrow-sys)"></line>
+    <text class="dg-note" x="507" y="76" text-anchor="middle">events</text>
+
+    <rect class="dg-surface" x="24" y="190" width="190" height="56" rx="6"></rect>
+    <text class="dg-label" x="119" y="214" text-anchor="middle">Your wallet</text>
+    <text class="dg-note" x="119" y="232" text-anchor="middle">the only signer</text>
+
+    <rect class="dg-zone" x="0" y="290" width="760" height="112" rx="6"></rect>
+    <text class="dg-zone-label" x="746" y="310" text-anchor="end">On chain · Cardano · nobody's</text>
+
+    <rect class="dg-surface--accent" x="24" y="322" width="250" height="62" rx="6"></rect>
+    <text class="dg-label" x="149" y="348" text-anchor="middle">Escrow UTxO</text>
+    <text class="dg-note--accent" x="149" y="366" text-anchor="middle">funds · terms · token</text>
+
+    <rect class="dg-surface" x="430" y="322" width="250" height="62" rx="6"></rect>
+    <text class="dg-label" x="555" y="348" text-anchor="middle">Config UTxO</text>
+    <text class="dg-note" x="555" y="366" text-anchor="middle">fee destinations · caps</text>
+
+    <line class="dg-line--quiet" x1="119" y1="116" x2="119" y2="181" marker-end="url(#dg-arrow-sys-quiet)"></line>
+    <text class="dg-note" x="131" y="152">unsigned tx</text>
+
+    <line class="dg-line" x1="119" y1="246" x2="119" y2="313" marker-end="url(#dg-arrow-sys)"></line>
+    <text class="dg-note" x="131" y="284">signed by you</text>
+
+    <path class="dg-line" d="M254 322 V266 H690 V125" marker-end="url(#dg-arrow-sys)"></path>
+    <text class="dg-note" x="266" y="258">watches the validator address</text>
+
+    <line class="dg-line--quiet" x1="274" y1="346" x2="421" y2="346" marker-end="url(#dg-arrow-sys-quiet)"></line>
+    <text class="dg-note" x="348" y="338" text-anchor="middle">reads, never spends</text>
+    </svg>
+  </div>
+  <figcaption>The chain holds the escrow; everything above the line is a convenience. The config UTxO is read as a reference input rather than spent, so every escrow in existence can point at it at once and no configuration change can reach money already locked.</figcaption>
+</figure>

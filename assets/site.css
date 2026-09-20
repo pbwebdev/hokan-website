@@ -36,6 +36,13 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 
+/* One gutter and one content width for the whole site: the header, the
+   full-bleed bands, the prose column and the footer all line up on it. */
+:root {
+  --gutter: clamp(20px, 6vw, 80px);
+  --shell: calc(var(--content-max) + 2 * var(--gutter));
+}
+
 [hidden] { display: none !important; }
 
 html { -webkit-text-size-adjust: 100%; }
@@ -68,15 +75,19 @@ img, svg { max-width: 100%; }
 
 /* --- Top bar ------------------------------------------------------ */
 .topbar {
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  padding: 0 clamp(20px, 6vw, 80px);
   border-bottom: var(--hairline) solid var(--border);
   background: var(--page);
   color: var(--text);
   font-family: var(--font-sans);
+}
+.topbar__inner {
+  max-width: var(--shell);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
 }
 .brand {
   display: flex; align-items: center; gap: 10px;
@@ -132,7 +143,7 @@ img, svg { max-width: 100%; }
 .nav-toggle__bars::after { bottom: 0; }
 
 @media (max-width: 860px) {
-  .topbar { flex-wrap: wrap; padding-block: 8px; gap: 12px; }
+  .topbar__inner { flex-wrap: wrap; padding-block: 8px; gap: 12px; }
   .nav-toggle { display: inline-flex; }
   .nav {
     flex-basis: 100%;
@@ -156,18 +167,18 @@ img, svg { max-width: 100%; }
 
 /* --- Page shells -------------------------------------------------- */
 .page {
-  max-width: var(--content-max);
+  max-width: var(--shell);
   margin: 0 auto;
-  padding: 64px clamp(20px, 6vw, 80px) 96px;
+  padding: 64px var(--gutter) 96px;
 }
 .page--roomy { padding-top: 80px; }
 
 .band {
   background: var(--page);
   color: var(--text);
-  padding: 80px clamp(20px, 6vw, 80px);
+  padding: 80px var(--gutter);
 }
-.band--hero { padding: 96px clamp(20px, 6vw, 80px) 88px; }
+.band--hero { padding: 96px var(--gutter) 88px; }
 .band__inner {
   max-width: var(--content-max);
   margin: 0 auto;
@@ -428,7 +439,7 @@ img, svg { max-width: 100%; }
 /* --- Footer ------------------------------------------------------- */
 .site-footer {
   border-top: var(--hairline) solid var(--border);
-  padding: var(--space-12) clamp(20px, 6vw, 80px) var(--space-16);
+  padding: var(--space-12) var(--gutter) var(--space-16);
   font-size: var(--text-body-md);
   color: var(--text-2);
 }
@@ -451,8 +462,172 @@ img, svg { max-width: 100%; }
 .footer-col__title { font-weight: var(--weight-medium); color: var(--text); margin-bottom: var(--space-1); }
 .footer-link { color: var(--text-2); text-decoration: none; }
 .footer-link:hover { color: var(--accent); }
-.cardano-lockup { height: 24px; display: block; }
 .footer-note { margin: 0; max-width: 46ch; color: var(--text-muted); }
+
+/* --- "Soon" markers ----------------------------------------------- */
+/* Nothing on this site links to a page that does not exist yet. Anything
+   still to be written is a label with a pill, never a dead anchor. */
+.pill {
+  display: inline-block;
+  margin-left: var(--space-2);
+  padding: 1px 6px;
+  border: var(--hairline) solid var(--border-input);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-size: 10px;
+  line-height: 16px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--text-muted);
+  vertical-align: 1px;
+  white-space: nowrap;
+}
+.nav__soon,
+.footer-link--soon { color: var(--text-muted); cursor: default; }
+.nav__soon { display: inline-flex; align-items: center; padding-bottom: 2px; }
+
+.btn--soon {
+  background: transparent;
+  color: var(--text-muted);
+  border: var(--hairline) dashed var(--border-input);
+  cursor: default;
+}
+.btn--soon .pill { border-color: currentColor; }
+
+/* --- Footer: parent company and social ---------------------------- */
+.footer-parent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-8);
+  border-top: var(--hairline) solid var(--border);
+  padding-top: var(--space-6);
+}
+.footer-parent__line { margin: 0; max-width: 62ch; }
+.footer-parent__line a { color: var(--text); text-decoration-color: var(--clay-400); }
+.footer-parent__line a:hover { color: var(--accent); }
+.footer-parent__social { display: flex; gap: var(--space-2); flex: none; }
+.social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-h-sm);
+  height: var(--control-h-sm);
+  border: var(--hairline) solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+}
+.social:hover { color: var(--accent); border-color: var(--border-input); }
+.social svg { width: 16px; height: 16px; fill: currentColor; display: block; }
+
+.cardano-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: var(--text-caption);
+  flex: none;
+}
+.cardano-lockup:hover { color: var(--text-2); }
+.cardano-lockup__mark { display: block; fill: var(--cardano-blue); }
+/* Cardano blue has no contrast on sumi, so the mark goes monochrome in dark. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cardano-lockup__mark { fill: var(--text-2); }
+}
+
+/* --- Diagrams ------------------------------------------------------ */
+.diagram {
+  margin: var(--space-6) 0;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+/* Below roughly 660px a diagram would scale its labels down to nothing, so
+   it scrolls sideways at a legible size instead. */
+.diagram__viewport { overflow-x: auto; overscroll-behavior-x: contain; }
+.diagram__viewport:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 4px; }
+.diagram svg {
+  width: 100%;
+  min-width: 620px;
+  height: auto;
+  display: block;
+  color: var(--text);
+}
+.diagram figcaption {
+  font-size: var(--text-caption);
+  line-height: var(--lh-caption);
+  color: var(--text-muted);
+  max-width: var(--prose-max);
+}
+@media (max-width: 700px) {
+  .diagram figcaption::after { content: " Scroll the diagram sideways to see all of it."; }
+}
+/* Shapes. Everything inherits the page foreground, so both themes work. */
+.dg-surface { fill: var(--card); stroke: var(--border-input); stroke-width: 1; }
+.dg-surface--quiet { fill: none; stroke: var(--border); stroke-width: 1; stroke-dasharray: 4 3; }
+.dg-surface--strong { fill: var(--inverse-surface); stroke: var(--inverse-surface); }
+.dg-surface--accent { fill: var(--accent-tint); stroke: var(--accent); }
+.dg-line { stroke: currentColor; stroke-width: 1.25; fill: none; }
+.dg-line--quiet { stroke: var(--border-input); stroke-width: 1; stroke-dasharray: 4 3; fill: none; }
+.dg-line--accent { stroke: var(--accent); stroke-width: 1.5; fill: none; }
+.dg-fill { fill: currentColor; }
+.dg-arrow { fill: currentColor; }
+.dg-arrow--quiet { fill: var(--border-input); }
+.dg-arrow--accent { fill: var(--accent); }
+.dg-label {
+  fill: currentColor;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: var(--weight-medium);
+}
+.dg-label--strong { fill: var(--inverse-text); }
+.dg-note {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.02em;
+}
+.dg-note--accent { fill: var(--accent); }
+.dg-zone {
+  fill: none;
+  stroke: var(--border);
+  stroke-width: 1;
+  stroke-dasharray: 2 4;
+}
+.dg-zone-label {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+/* --- Page transitions ---------------------------------------------- */
+/* Cross-document view transitions where the browser has them, a CSS
+   animation plus a small script everywhere else. Both are a plain fade. */
+@view-transition { navigation: auto; }
+
+@keyframes hk-page-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hk-page-out { from { opacity: 1; } to { opacity: 0; } }
+
+::view-transition-old(root) { animation: hk-page-out 120ms var(--ease) both; }
+::view-transition-new(root) { animation: hk-page-in 220ms var(--ease) both; }
+
+@supports not (view-transition-name: none) {
+  body { animation: hk-page-in 220ms var(--ease) both; }
+  body.is-leaving { animation: hk-page-out 140ms var(--ease) both; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation-duration: 0.01ms; }
+  body,
+  body.is-leaving { animation: none; }
+}
 
 @media print {
   .topbar, .nav-toggle, .skip-link { display: none; }

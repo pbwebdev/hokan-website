@@ -1,0 +1,39 @@
+<figure class="diagram">
+  <div class="diagram__viewport" role="region" tabindex="0" aria-label="Fee routing at release, scrollable diagram">
+    <svg viewBox="0 0 620 262" role="img" aria-label="Fee routing. A single release transaction spends the escrow UTxO and pays three outputs at once: the net amount to the receiver, your own fees to the address you nominated, and the 0.5 per cent protocol fee, capped at 1000 USD.">
+    <defs>
+      <marker id="dg-arrow-fee" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto">
+        <polygon class="dg-arrow" points="0,0 8,4 0,8"></polygon>
+      </marker>
+    </defs>
+
+    <rect class="dg-surface--accent" x="0" y="98" width="190" height="64" rx="6"></rect>
+    <text class="dg-label" x="95" y="126" text-anchor="middle">Escrow UTxO</text>
+    <text class="dg-note--accent" x="95" y="144" text-anchor="middle">frozen at funding</text>
+
+    <line class="dg-line" x1="190" y1="130" x2="241" y2="130" marker-end="url(#dg-arrow-fee)"></line>
+
+    <rect class="dg-surface--strong" x="250" y="30" width="46" height="200" rx="6"></rect>
+    <text class="dg-label dg-label--strong" x="273" y="135" text-anchor="middle" transform="rotate(-90 273 135)">One release tx</text>
+
+    <rect class="dg-surface" x="400" y="26" width="220" height="56" rx="6"></rect>
+    <text class="dg-label" x="416" y="50">Receiver</text>
+    <text class="dg-note" x="416" y="68">net amount</text>
+
+    <rect class="dg-surface" x="400" y="102" width="220" height="56" rx="6"></rect>
+    <text class="dg-label" x="416" y="126">Your fee address</text>
+    <text class="dg-note" x="416" y="144">funding · release · dispute</text>
+
+    <rect class="dg-surface" x="400" y="178" width="220" height="56" rx="6"></rect>
+    <text class="dg-label" x="416" y="202">Protocol fee address</text>
+    <text class="dg-note" x="416" y="220">0.5% · capped at 1 000 USD</text>
+
+    <path class="dg-line" d="M296 110 H348 V54 H391" marker-end="url(#dg-arrow-fee)"></path>
+    <line class="dg-line" x1="296" y1="130" x2="391" y2="130" marker-end="url(#dg-arrow-fee)"></line>
+    <path class="dg-line" d="M296 150 H348 V206 H391" marker-end="url(#dg-arrow-fee)"></path>
+
+    <text class="dg-note" x="0" y="256">No settlement run, no reconciliation window, nothing held back.</text>
+    </svg>
+  </div>
+  <figcaption>Every fee is routed in the same transaction that releases the funds, against a schedule that froze when the escrow was funded. A later pricing change cannot reach it.</figcaption>
+</figure>

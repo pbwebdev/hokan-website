@@ -15,7 +15,51 @@ export const NAV = [
   { label: "Use cases", href: "use-cases.html" },
   { label: "Pricing", href: "pricing.html" },
   { label: "Trust", href: "trust.html" },
-  { label: "Docs", href: "#docs" },
+  /* Not written yet. Rendered as a label with a Soon pill, never a dead link. */
+  { label: "Docs", soon: true },
+];
+
+/* The company that builds Hokan. Shown in the footer on every page and on the
+   trust page, so the relationship is never something a reader has to infer. */
+export const PARENT = {
+  name: "Moshi Concepts",
+  legalName: "Moshi Concepts Inc.",
+  url: "https://moshiconcepts.com/",
+  social: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/moshi-concepts/" },
+    { label: "X", href: "https://x.com/moshiconcepts" },
+  ],
+};
+
+/* Footer columns. A `soon` entry renders as muted text with a Soon pill. */
+export const FOOTER_COLUMNS = [
+  {
+    title: "Product",
+    links: [
+      { label: "How it works", href: "how-it-works.html" },
+      { label: "Architecture", href: "architecture.html" },
+      { label: "Use cases", href: "use-cases.html" },
+      { label: "Pricing", href: "pricing.html" },
+    ],
+  },
+  {
+    title: "Developers",
+    links: [
+      { label: "Documentation", soon: true },
+      { label: "API reference", soon: true },
+      { label: "Sandbox", soon: true },
+      { label: "Contracts", soon: true },
+    ],
+  },
+  {
+    title: "Trust",
+    links: [
+      { label: "Security", href: "trust.html" },
+      { label: "Audit", href: "trust.html#audit" },
+      { label: "Questions", href: "trust.html#faq" },
+      { label: "Status", soon: true },
+    ],
+  },
 ];
 
 export const PAGES = [

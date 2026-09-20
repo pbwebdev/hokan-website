@@ -41,3 +41,51 @@
 
   sync();
 })();
+
+/* Cross-page fade for browsers without cross-document view transitions.
+   Where the browser has them, the CSS in assets/site.css does the whole job
+   and this block stays out of the way. */
+(function () {
+  "use strict";
+
+  if (CSS.supports("view-transition-name: none")) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  var LEAVING = "is-leaving";
+  var timer;
+
+  /* Coming back via bfcache must never leave the page faded out. */
+  window.addEventListener("pageshow", function () {
+    clearTimeout(timer);
+    document.body.classList.remove(LEAVING);
+  });
+
+  document.addEventListener("click", function (e) {
+    if (e.defaultPrevented || e.button !== 0) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    var link = e.target.closest && e.target.closest("a[href]");
+    if (!link || link.target || link.hasAttribute("download")) return;
+
+    var url;
+    try {
+      url = new URL(link.href, location.href);
+    } catch (err) {
+      return;
+    }
+    if (url.origin !== location.origin) return;
+    // Same page, different hash: let the browser jump, do not fade.
+    if (url.pathname === location.pathname && url.search === location.search) return;
+
+    e.preventDefault();
+    document.body.classList.add(LEAVING);
+
+    var go = function () {
+      clearTimeout(timer);
+      location.href = url.href;
+    };
+    document.body.addEventListener("animationend", go, { once: true });
+    // Navigate anyway if the animation never fires.
+    timer = setTimeout(go, 220);
+  });
+})();
